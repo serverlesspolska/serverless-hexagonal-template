@@ -6,14 +6,11 @@ Highly opinionated project template for [Serverless Framework](https://www.serve
 This is a *template* from which you can create your own project by executing following command:
 ```
 sls create --template-url https://github.com/serverlesspolska/serverless-hexagonal-template --name your-project-name
-cd your-project-name
-rm -rf .git
-sed -i -- "s/serverless-hexagonal-template/your-project-name/g" serverless.yml package.json package-lock.json
 ```
-If you have problems with `sed` please read this [thread](https://stackoverflow.com/questions/11392478/how-to-replace-a-string-in-multiple-files-in-linux-command-line).
 
 Next install dependencies:
 ```
+cd your-project-name
 npm i
 ```
 and deploy to `dev` stage in default region:
