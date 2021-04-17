@@ -15,12 +15,18 @@
   "devDependencies": {
     "@types/jest": "^26.0.22",
     "aws-sdk": "^2.884.0",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.3",
+    "serverless": "^2.22.0",
     "serverless-export-env": "^1.4.1",
     "serverless-iam-roles-per-function": "^3.1.0"
+  },
+  "dependencies": {
+    "@middy/core": "^1.5.2",
+    "middy-autoproxyresponse": "^0.1.0"
   }
 }

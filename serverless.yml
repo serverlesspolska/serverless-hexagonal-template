@@ -15,6 +15,7 @@ provider:
   environment:
     stage: ${self:provider.stage}
     region: ${self:provider.region}
+    httpApiGatewayEndpointId: !Ref HttpApi
   tags:
     Application: ${self:service}
     Stage: ${self:provider.stage}
@@ -27,13 +28,17 @@ custom:
   description: Your short project description that will be shown in Lambda -> Applications console & in CloudFormation stack
 
 functions:
-  sampleOne:
-    handler: src/sampleOne/function.handler
-    description: Function One description
+  createItem:
+    handler: src/createItem/function.handler
+    description: Create Item in repository
     memorySize: 128
     timeout: 5
     environment:
-      FOO: BAR
+      foo: bar
+    events:
+      - httpApi:
+          method: POST
+          path: /item
 
   sampleTwo:
     handler: src/sampleTwo/function.handler
@@ -42,11 +47,6 @@ functions:
     timeout: 2
     environment:
       message: Hello World!
-    events:
-      - http:
-          path: sample/two
-          method: get
-          cors: true
 
 resources:
   Description: ${self:custom.description}
