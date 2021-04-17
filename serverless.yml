@@ -48,5 +48,12 @@ functions:
     environment:
       message: Hello World!
 
+package:
+  exclude:
+    - __tests__/**
+    - config/**
+    - documentation/**
+    - '*'
+
 resources:
   Description: ${self:custom.description}
