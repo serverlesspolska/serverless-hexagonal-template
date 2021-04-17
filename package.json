@@ -1,0 +1,26 @@
+{
+  "name": "serverless-hexagonal-template",
+  "version": "1.0.0",
+  "description": "Highly opinionated project template for Serverless Framework that follows that applies hexagonal architecture principle to serverless world. Prepared with easy testing in mind.",
+  "author": "Pawel Zubkiewicz",
+  "license": "MIT",
+  "scripts": {
+    "eslint": "node_modules/.bin/eslint src/**/*.js --ignore-pattern node_modules/",
+    "dotenv": "STAGE=${STAGE:=dev} && sls export-env -s $STAGE",
+    "test": "jest --config config/unit.jest.config.js",
+    "integration": "npm run dotenv && jest --config config/integration.jest.config.js",
+    "int": "jest --config config/integration.jest.config.js",
+    "e2e": "jest --config config/e2e.jest.config.js"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.22",
+    "aws-sdk": "^2.884.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3",
+    "serverless-export-env": "^1.4.1",
+    "serverless-iam-roles-per-function": "^3.1.0"
+  }
+}

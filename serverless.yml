@@ -1,0 +1,44 @@
+service: serverless-hexagonal-template
+
+plugins:
+  - serverless-iam-roles-per-function
+  - serverless-export-env
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  runtime: nodejs14.x
+  profile: ${self:custom.deployment.profile.${self:provider.stage}}
+  region: ${self:custom.deployment.region.${self:provider.stage}}
+  # Deployment config
+  logRetentionInDays: 60 # how long logs are kept in CloudWatch
+
+useDotenv: "false"
+
+custom:
+  deployment: ${file(config/deployment.yml):deployment}
+
+functions:
+  sampleOne:
+    handler: src/sampleOne/function.handler
+    description: Function One description
+    memorySize: 128
+    timeout: 5
+    environment:
+      FOO: BAR
+
+  sampleTwo:
+    handler: src/sampleTwo/function.handler
+    description: Function Two description
+    memorySize: 512
+    timeout: 2
+    environment:
+      message: Hello World!
+    events:
+      - http:
+          path: sample/two
+          method: get
+          cors: true
+
+resources:
+  Description: Your microservice description that will be shown in Lambda -> Applications console
