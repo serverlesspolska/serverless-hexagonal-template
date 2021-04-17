@@ -12,6 +12,12 @@ provider:
   region: ${self:custom.deployment.region.${self:provider.stage}}
   lambdaHashingVersion: 20201221
   logRetentionInDays: 60 # how long logs are kept in CloudWatch
+  environment:
+    stage: ${self:provider.stage}
+    region: ${self:provider.region}
+  tags:
+    Application: ${self:service}
+    Stage: ${self:provider.stage}
 
 useDotenv: false
 configValidationMode: off
