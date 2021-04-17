@@ -1,7 +1,7 @@
 {
   "name": "serverless-hexagonal-template",
   "version": "1.0.0",
-  "description": "Highly opinionated project template for Serverless Framework that follows that applies hexagonal architecture principle to serverless world. Prepared with easy testing in mind.",
+  "description": "Highly opinionated project template for Serverless Framework that follows and applies hexagonal architecture principle to serverless world. Prepared with easy testing in mind.",
   "author": "Pawel Zubkiewicz",
   "license": "MIT",
   "scripts": {
