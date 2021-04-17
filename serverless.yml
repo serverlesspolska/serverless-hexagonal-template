@@ -40,11 +40,11 @@ functions:
           method: POST
           path: /item
 
-  sampleTwo:
-    handler: src/sampleTwo/function.handler
-    description: Function Two description
-    memorySize: 512
-    timeout: 2
+  processItem:
+    handler: src/processItem/function.handler
+    description: Triggered by DynamoDB Streams. Does some work on newly created Item
+    memorySize: 128
+    timeout: 5
     environment:
       message: Hello World!
 

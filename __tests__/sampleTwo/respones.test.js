@@ -1,4 +1,4 @@
-const responses = require('../../src/sampleTwo/responses')
+const responses = require('../../src/processItem/responses')
 
 describe('Responses tests', () => {
   it('should return 200 response code on success', () => {
