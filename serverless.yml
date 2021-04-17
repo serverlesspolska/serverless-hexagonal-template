@@ -10,7 +10,7 @@ provider:
   runtime: nodejs14.x
   profile: ${self:custom.deployment.profile.${self:provider.stage}}
   region: ${self:custom.deployment.region.${self:provider.stage}}
-  # Deployment config
+  lambdaHashingVersion: 20201221
   logRetentionInDays: 60 # how long logs are kept in CloudWatch
 
 useDotenv: "false"
