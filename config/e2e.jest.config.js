@@ -2,6 +2,7 @@ const { config } = require('dotenv');
 const { resolve } = require('path');
 
 module.exports = {
+  testEnvironment: 'node',
   roots: ['../__tests__/'],
   testMatch: ['**/*.(e2e).js'],
   testTimeout: 60000 * 7, // 7 minutes timeout
