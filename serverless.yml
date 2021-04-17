@@ -13,10 +13,12 @@ provider:
   lambdaHashingVersion: 20201221
   logRetentionInDays: 60 # how long logs are kept in CloudWatch
 
-useDotenv: "false"
+useDotenv: false
+configValidationMode: off
 
 custom:
   deployment: ${file(config/deployment.yml):deployment}
+  description: Your short project description that will be shown in Lambda -> Applications console & in CloudFormation stack
 
 functions:
   sampleOne:
@@ -41,4 +43,4 @@ functions:
           cors: true
 
 resources:
-  Description: Your microservice description that will be shown in Lambda -> Applications console
+  Description: ${self:custom.description}
