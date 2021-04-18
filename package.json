@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@middy/core": "^1.5.2",
+    "ksuid": "^2.0.0",
     "middy-autoproxyresponse": "^0.1.0"
   }
 }
