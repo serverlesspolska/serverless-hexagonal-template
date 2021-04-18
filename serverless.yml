@@ -26,6 +26,7 @@ configValidationMode: off
 custom:
   deployment: ${file(config/deployment.yml):deployment}
   description: Your short project description that will be shown in Lambda -> Applications console & in CloudFormation stack
+  tableName: ${self:service}-${self:provider.stage}
 
 functions:
   createItem:
@@ -34,7 +35,7 @@ functions:
     memorySize: 128
     timeout: 5
     environment:
-      foo: bar
+      tableName: ${self:custom.tableName}
     events:
       - httpApi:
           method: POST
@@ -57,3 +58,26 @@ package:
 
 resources:
   Description: ${self:custom.description}
+
+  Resources:
+
+    Table:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.tableName}
+        Tags:
+          - Key: Application
+            Value: ${self:service}
+          - Key: Stage
+            Value: ${self:provider.stage}
+          - Key: StackName
+            Value: !Ref AWS::StackId
+        StreamSpecification:
+          StreamViewType: NEW_IMAGE
