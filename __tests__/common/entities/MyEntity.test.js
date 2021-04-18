@@ -31,4 +31,21 @@ describe('My Entity', () => {
     expect(actual.createdAt.S).toBeTruthy()
     expect(actual.result.N).toBe('48')
   })
+
+  it('should be from DynamoDB item to object', () => {
+    // GIVEN
+    const params = {
+      result: 48
+    }
+    const item = new MyEntity(params)
+    const dbItem = item.toItem()
+    
+    // WHEN
+    const actual = MyEntity.fromItem(dbItem)
+
+    // THEN
+    expect(actual.id).toBe(dbItem.PK.S)
+    expect(actual.createdAt.toISOString()).toBe(dbItem.createdAt.S)
+    expect(actual.result).toBe(params.result)
+  })
 })

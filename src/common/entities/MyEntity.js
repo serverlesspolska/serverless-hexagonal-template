@@ -17,6 +17,7 @@ module.exports = class MyEntity {
 
   static fromItem(item) {
     return new MyEntity({
+      id: item.PK.S,
       result: item.result.N,
       createdAt: item.createdAt.S
     })
