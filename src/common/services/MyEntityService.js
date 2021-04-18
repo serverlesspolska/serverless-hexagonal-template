@@ -1,7 +1,7 @@
 const DynamoDbAdapter = require('../adapters/DynamoDbAdapter')
 const MyEntity = require('../entities/MyEntity')
 
-module.exports = class PointerService {
+module.exports = class MyEntityService {
   constructor(dynamoDbAdapter) {
     this.dynamoDbAdapter = dynamoDbAdapter || new DynamoDbAdapter()
   }
