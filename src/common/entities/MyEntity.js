@@ -1,11 +1,10 @@
 const crypto = require('crypto')
 const KSUID = require('ksuid')
 
-/* eslint-disable radix */
 module.exports = class MyEntity {
   constructor({ id, result, createdAt = new Date() }) {
     this.createdAt = createdAt instanceof Date ? createdAt : new Date(createdAt)
-    this.result = parseInt(result)
+    this.result = parseInt(result, 10)
     this.id = id || this.generateId(createdAt)
   }
 
