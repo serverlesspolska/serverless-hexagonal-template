@@ -6,24 +6,12 @@ module.exports = class MyEntityService {
     this.dynamoDbAdapter = dynamoDbAdapter || new DynamoDbAdapter()
   }
 
-  async createMyEntity(result) {
+  async create(result) {
     const myEntity = new MyEntity({ result })
-    const params = {
-      Item: myEntity.toItem(),
-      // Key: pointer.key(),
-      ReturnConsumedCapacity: 'TOTAL',
-      TableName: process.env.tableName
-    }
-    try {
-      await this.dynamoDbAdapter.create(params)
-    } catch (error) {
-      console.log('Error', error)
-      throw error
-    }
-    return myEntity
+    return this.dynamoDbAdapter.createItem(process.env.tableName, myEntity)
   }
 
-  async getItemById(id) {
+  async getById(id) {
     const response = await this.dynamoDbAdapter.queryByField('PK', id)
     const item = response.Items[0]
     return new MyEntity({ id: item.PK, result: item.result, createdAt: item.createdAt })

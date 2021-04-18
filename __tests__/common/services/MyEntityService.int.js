@@ -7,8 +7,8 @@ describe('MyEntity service', () => {
     const service = new MyEntityService()
 
     // WHEN
-    const actual = await service.createMyEntity(result)
-    const itemStoredInDb = await service.getItemById(actual.id)
+    const actual = await service.create(result)
+    const itemStoredInDb = await service.getById(actual.id)
 
     // THEN
     expect(itemStoredInDb).toBeTruthy()

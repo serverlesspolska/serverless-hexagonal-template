@@ -47,6 +47,21 @@ module.exports = class DynamoDbAdapter {
     return this.client.getItem(params).promise()
   }
 
+  async createItem(tableName, entity) {
+    const params = {
+      Item: entity.toItem(),
+      ReturnConsumedCapacity: 'TOTAL',
+      TableName: tableName
+    }
+    try {
+      await this.create(params)
+      return entity
+    } catch (error) {
+      console.log('Error', error)
+      throw error
+    }
+  }
+
   async create(params) {
     return this.client.putItem(params).promise()
   }
