@@ -39,7 +39,7 @@ describe('My Entity', () => {
     }
     const item = new MyEntity(params)
     const dbItem = item.toItem()
-    
+
     // WHEN
     const actual = MyEntity.fromItem(dbItem)
 
