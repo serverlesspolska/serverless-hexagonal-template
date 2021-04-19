@@ -57,9 +57,9 @@ npm run integration
 ```
 Those commands deploy project to the cloud on `dev` stage and execute integration tests.
 
-The `npm run integration` command executes underneath the `serverless-export-env` plugin that exports environment variables set for each Lambda function in the cloud. Results of that command are saved locally to the `.env` file. This file is later injected into `jest` context during tests.
+The `npm run integration` command executes underneath the `serverless-export-env` plugin that exports environment variables set for each Lambda function in the cloud. Results of that command are saved locally to the `.awsenv` file. This file is later injected into `jest` context during tests.
 
-There is also a *shortcut* command that executes tests but doesn't execute `serverless-export-env` plugin. It requires the `.env` file to be already present. Since environment variables don't change that often this can save you time.
+There is also a *shortcut* command that executes tests but doesn't execute `serverless-export-env` plugin. It requires the `.awsenv` file to be already present. Since environment variables don't change that often this can save you time.
 ```
 npm run int
 ```
@@ -91,7 +91,7 @@ sls deploy -s <stage> # stage = dev | test | prod
 
 Serverless Framework plugins:
 - serverless-iam-roles-per-function - to manage individual IAM roles for each function
-- serverless-export-env - to export Lambda functions environment variables in `.env` file
+- serverless-export-env - to export Lambda functions environment variables in `.awsenv` file
 
 
 Node.js development libraries:
