@@ -20,13 +20,14 @@ provider:
     Application: ${self:service}
     Stage: ${self:provider.stage}
 
-useDotenv: false
 configValidationMode: off
 
 custom:
   deployment: ${file(config/deployment.yml):deployment}
   description: Your short project description that will be shown in Lambda -> Applications console & in CloudFormation stack
   tableName: ${self:service}-${self:provider.stage}
+  export-env: # serverless-export-env config
+    filename: .awsenv # custom filename to avoid conflict with Serverless Framework '.env' auto loading feature
 
 functions:
   createItem:
@@ -55,6 +56,8 @@ package:
     - config/**
     - documentation/**
     - '*'
+
+
 
 resources:
   Description: ${self:custom.description}

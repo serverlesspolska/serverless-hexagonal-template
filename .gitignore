@@ -9,6 +9,7 @@ jspm_packages
 .envrc
 .env
 .nvmrc
+.awsenv
 
 # IDE
 .vscode
