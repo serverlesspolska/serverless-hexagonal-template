@@ -8,7 +8,7 @@ describe('Creat Item buiness logic suite', () => {
     const method = 'add'
 
     // WHEN
-    const actual = businessLogic.performCalculation(a, b, method)
+    const actual = businessLogic.performCalculation({ a, b, method })
 
     // THEN
     expect(actual).toBe(7)
