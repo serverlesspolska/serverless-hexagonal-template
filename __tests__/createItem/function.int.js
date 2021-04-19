@@ -34,4 +34,26 @@ describe('createItem function', () => {
     expect(actual.status).toBe(400)
     expect(actual.statusText).toBe('Bad Request')
   })
+
+  it('should respond with Not implemented yet for other methods than add', async () => {
+    // GIVEN
+    const payload = {
+      a: 10,
+      b: 5,
+      method: 'divide'
+    }
+
+    // WHEN
+    let actual
+    try {
+      await axios.post('/item', payload)
+    } catch (e) {
+      actual = e.response
+    }
+
+    // THEN
+    expect(actual.status).toBe(400)
+    expect(actual.statusText).toBe('Bad Request')
+    expect(actual.data).toBe('Not implemented yet!')
+  })
 })
