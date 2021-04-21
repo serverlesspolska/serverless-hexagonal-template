@@ -21,8 +21,8 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.3",
-    "serverless": "^2.22.0",
-    "serverless-export-env": "^1.4.1",
+    "serverless": "^2.37.0",
+    "serverless-export-env": "github:serverlesspolska/serverless-export-env",
     "serverless-iam-roles-per-function": "^3.1.0"
   },
   "dependencies": {
