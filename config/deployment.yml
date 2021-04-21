@@ -7,3 +7,29 @@ deployment:
     dev: eu-central-1   # Frankfurt
     test: eu-west-1     # Ireland
     prod: us-east-1     # N.Virginia
+
+  # If you need to run Lambda inside VPC uncomment below  
+  # and configure SG and subnets below:
+  #
+  # vpc:
+  #   dev:                  
+  #     securityGroupId: sg-abcdefgh
+  #     subnetId1: subnet-12345678
+  #     subnetId2: subnet-12345678
+  #   qa:
+  #     securityGroupId: sg-abcdefgh
+  #     subnetId1: subnet-12345678
+  #     subnetId2: subnet-12345678
+  #   prod:
+  #     securityGroupId: sg-abcdefgh
+  #     subnetId1: subnet-12345678
+  #     subnetId2: subnet-12345678
+  #
+  #
+  #  Next in serverless.yml in Lambda function section add following:
+  #   vpc:
+  #     securityGroupIds:
+  #       - ${self:custom.deployment.vpc.${self:provider.stage}.securityGroupId}
+  #     subnetIds:
+  #       - ${self:custom.deployment.vpc.${self:provider.stage}.subnetId1}
+  #       - ${self:custom.deployment.vpc.${self:provider.stage}.subnetId2}
