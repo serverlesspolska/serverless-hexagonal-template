@@ -13,8 +13,11 @@ provider:
   lambdaHashingVersion: 20201221
   logRetentionInDays: 60 # how long logs are kept in CloudWatch
   environment:
+    # required Environment Variables. Don't remove.
     stage: ${self:provider.stage}
     region: ${self:provider.region}
+    service: ${self:service}
+    # your variables - optional
     httpApiGatewayEndpointId: !Ref HttpApi
   tags:
     Application: ${self:service}
