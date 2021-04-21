@@ -16,7 +16,7 @@ deployment:
   #     securityGroupId: sg-abcdefgh
   #     subnetId1: subnet-12345678
   #     subnetId2: subnet-12345678
-  #   qa:
+  #   test:
   #     securityGroupId: sg-abcdefgh
   #     subnetId1: subnet-12345678
   #     subnetId2: subnet-12345678
