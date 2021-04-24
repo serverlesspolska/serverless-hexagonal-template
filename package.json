@@ -16,6 +16,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.22",
     "aws-sdk": "^2.892.0",
+    "aws-testing-library": "^1.1.1",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.25.0",

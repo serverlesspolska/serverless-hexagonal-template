@@ -11,6 +11,8 @@ provider:
   profile: ${self:custom.deployment.profile.${self:provider.stage}}
   region: ${self:custom.deployment.region.${self:provider.stage}}
   lambdaHashingVersion: 20201221
+  httpApi:
+    useProviderTags: true
   logRetentionInDays: 60 # how long logs are kept in CloudWatch
   environment:
     # required Environment Variables. Don't remove.
@@ -62,6 +64,12 @@ functions:
     timeout: 5
     environment:
       message: Hello World!
+    events:
+      - stream:
+          type: dynamodb
+          arn: !GetAtt Table.StreamArn
+          maximumRetryAttempts: 1
+          batchSize: 1
 
 package:
   patterns:
