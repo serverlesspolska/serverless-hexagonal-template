@@ -37,6 +37,8 @@ Tests are written using `jest` framework and are divided into three separate gro
 * integration
 * end to end (e2e)
 
+![Testing diagram](documentation/testing.png)
+Note: Unit tests not shown on the diagram for clarity.
 ### Unit tests
 Those tests are executed locally (on developers computer or CI/CD server) and don't require access to any resources in the AWS cloud or on the Internet.
 
@@ -75,6 +77,12 @@ An example of such test would be `POST` request send to API Gateway endpoint and
 npm run e2e
 ```
 
+#### Run all tests
+Convenience command has been added for running all test. Please bare in mind it requires deployed service.
+```
+npm run all
+```
+
 #### GUI / acceptance tests
 End to end tests are not a substitution to GUI or acceptance tests. For those other solutions (such as AWS CloudWatch Synthetics) are needed.
 
@@ -101,5 +109,5 @@ Node.js development libraries:
 * AWS SDK
 * Eslint with modified airbnb-base see `.eslintrc.yml`
 * Jest
-* dotenv 
-
+* dotenv
+* aws-testing-library for *end to end* testing
