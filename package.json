@@ -10,7 +10,8 @@
     "test": "jest --config config/unit.jest.config.js",
     "integration": "npm run dotenv && jest --config config/integration.jest.config.js",
     "int": "jest --config config/integration.jest.config.js",
-    "e2e": "jest --config config/e2e.jest.config.js"
+    "e2e": "jest --config config/e2e.jest.config.js",
+    "all": "npm run test && npm run int"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
