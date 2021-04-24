@@ -54,6 +54,8 @@ npm run test
 
 Integration tests focus on pieces of your code (in OOP I'd say *classes*), that realize particular *low* & *mid* level actions. For example your Lambda function may read from DynamoDB, so you would write a *service* and *adapter* modules (classes) that would implement this functionality. Integration test would be executed against **real** DynamoDB table provisioned during deployment of that project. However the code will be running locally (on you computer or CI/CD server).
 
+![Integration tests](documentation/testing-int.png)
+
 Those tests require resources in the cloud. In order to execute them you first need to *deploy* this project to AWS. 
 ```
 sls deploy
@@ -71,8 +73,13 @@ npm run int
 ### End to end tests (e2e)
 End to end tests focus on whole use cases (from beginning to the end) or larger fragments of those. Usually those tests take longer than integration tests. 
 
-An example of such test would be `POST` request send to API Gateway endpoint and check if new item was created in DynamoDB database.
+An example of such test would be `POST` request sent to API Gateway `/item` endpoint and a check if `processItem` Lambda function was triggered by DynamoDB Streams as a result of saving new item by `createItem` Lambda function invoked by the request. Such approach tests *chain of events* that happen in the cloud and **gives confidence** that integration between multiple services is well configured.
 
+![e2e test](documentation/testing-e2e.png)
+
+This test is implemented in `__tests__/processItem/functionIsTriggeredByDdbStream.e2e.js`
+
+You can test it yourself by executing:
 ```
 npm run e2e
 ```
