@@ -8,7 +8,8 @@ module.exports = class MyEntityService {
 
   async create(result) {
     const myEntity = new MyEntity({ result })
-    return this.dynamoDbAdapter.createItem(process.env.tableName, myEntity)
+    await this.dynamoDbAdapter.createItem(process.env.tableName, myEntity)
+    return myEntity
   }
 
   async getById(id) {

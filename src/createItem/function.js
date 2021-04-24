@@ -9,8 +9,7 @@ const MyEntityService = require('../common/services/MyEntityService')
 const handler = async (event) => {
   const result = businessLogic.performCalculation(event.body)
   const myEntityService = new MyEntityService()
-  await myEntityService.create(result)
-  return result
+  return myEntityService.create(result)
 }
 
 const inputSchema = {
