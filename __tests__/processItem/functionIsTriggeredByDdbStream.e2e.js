@@ -13,8 +13,7 @@ describe('processItem Lambda function', () => {
 
     // WHEN
     const actual = await axios.post('/item', payload)
-
-    // console.log(actual)
+    const newItemDbId = actual.data.id
 
     // THEN
     expect(actual.status).toBe(200)
@@ -23,8 +22,14 @@ describe('processItem Lambda function', () => {
     await expect({
       region: process.env.region,
       function: `${process.env.service}-${process.env.stage}-processItem`,
+      timeout: 25 * 1000
     }).toHaveLog(
-      'Processing item' /* a message log in processItem Lambda function */,
+      /* a log message in the processItem Lambda function
+         with id of newly crated item profs that functions
+         was invoked, and DynamoDB Stream integration is
+         properly configured
+      */
+      `Processing item ${newItemDbId}`
     );
   })
 })
