@@ -64,13 +64,14 @@ functions:
       message: Hello World!
 
 package:
-  exclude:
-    - __tests__/**
-    - config/**
-    - documentation/**
-    - '*'
-
-
+  patterns:
+    # include
+    - src/**
+    # exclude
+    - '!*'
+    - '!__tests__/**'
+    - '!documentation/**'
+    - '!config/**'
 
 resources:
   Description: ${self:custom.description}
