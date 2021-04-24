@@ -17,7 +17,9 @@ and deploy to `dev` stage in default region:
 ```
 sls deploy
 ```
-
+# High-level architecture
+This template implements following architecture.
+![High-level architecture](documentation/high-level.png)
 # Why use this template?
 This template project was created with two goals in mind: ***streamlined developer's flow*** and ***easy testing***, because, sadly, both are not common in serverless development yet. 
 
