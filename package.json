@@ -24,7 +24,7 @@
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.3",
     "serverless": "^2.38.0",
-    "serverless-export-env": "github:serverlesspolska/serverless-export-env",
+    "serverless-export-env": "^1.4.4",
     "serverless-iam-roles-per-function": "^3.1.0"
   },
   "dependencies": {
