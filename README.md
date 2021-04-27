@@ -89,7 +89,13 @@ Convenience command has been added for running all test. Please bare in mind it 
 ```
 npm run all
 ```
-
+#### DEBUG mode
+If you want to see logs when running tests on your local machines just set environment variable `DEBUG` to value `ON`. For example:
+```
+DEBUG=ON npm run test
+ # or
+DEBUG=ON npm run integration
+```
 #### GUI / acceptance tests
 End to end tests are not a substitution to GUI or acceptance tests. For those other solutions (such as AWS CloudWatch Synthetics) are needed.
 
@@ -118,3 +124,4 @@ Node.js development libraries:
 * Jest
 * dotenv
 * aws-testing-library for *end to end* testing
+* [serverless-logger](https://github.com/serverlesspolska/serverless-logger)

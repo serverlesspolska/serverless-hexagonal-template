@@ -24,7 +24,7 @@
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.3",
     "serverless": "^2.38.0",
-    "serverless-export-env": "github:serverlesspolska/serverless-export-env",
+    "serverless-export-env": "^1.4.4",
     "serverless-iam-roles-per-function": "^3.1.0"
   },
   "dependencies": {
@@ -33,6 +33,7 @@
     "@middy/http-json-body-parser": "^2.0.1",
     "@middy/validator": "^2.0.1",
     "ksuid": "^2.0.0",
-    "middy-autoproxyresponse": "^0.1.0"
+    "middy-autoproxyresponse": "^0.1.0",
+    "serverless-logger": "^1.1.1"
   }
 }
