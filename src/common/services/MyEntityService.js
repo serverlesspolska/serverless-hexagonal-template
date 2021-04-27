@@ -1,3 +1,4 @@
+const log = require('serverless-logger')(__filename)
 const DynamoDbAdapter = require('../adapters/DynamoDbAdapter')
 const MyEntity = require('../entities/MyEntity')
 
@@ -7,6 +8,7 @@ module.exports = class MyEntityService {
   }
 
   async create(result) {
+    log('Creating MyEntity item in repository')
     const myEntity = new MyEntity({ result })
     await this.dynamoDbAdapter.createItem(process.env.tableName, myEntity)
     return myEntity

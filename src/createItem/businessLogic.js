@@ -1,4 +1,7 @@
+const log = require('serverless-logger')(__filename)
+
 const performCalculation = ({ a, b, method }) => {
+  log(`Received method="${method}" and values: a=${a}; b=${b}`)
   switch (method) {
     case 'add':
       return a + b

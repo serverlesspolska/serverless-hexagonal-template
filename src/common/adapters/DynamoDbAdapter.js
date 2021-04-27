@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk')
+const log = require('serverless-logger')(__filename)
 
 module.exports = class DynamoDbAdapter {
   constructor() {
@@ -48,6 +49,7 @@ module.exports = class DynamoDbAdapter {
   }
 
   async createItem(tableName, entity) {
+    log(`Saving new item id="${entity.id}" into DynamoDB table ${tableName}`)
     const params = {
       Item: entity.toItem(),
       ReturnConsumedCapacity: 'TOTAL',
@@ -55,9 +57,10 @@ module.exports = class DynamoDbAdapter {
     }
     try {
       await this.create(params)
+      log('Item saved successfully')
       return entity
     } catch (error) {
-      console.log('Error', error)
+      log('Error', error)
       throw error
     }
   }
@@ -67,7 +70,7 @@ module.exports = class DynamoDbAdapter {
   }
 
   async delete(params) {
-    console.log(`Deleting item with PK = ${params.Key.PK.S} & SK = ${params.Key.SK ? params.Key.SK.S : 'not present'}`)
+    log(`Deleting item with PK = ${params.Key.PK.S} & SK = ${params.Key.SK ? params.Key.SK.S : 'not present'}`)
     return this.client.deleteItem(params).promise()
   }
 
@@ -90,7 +93,7 @@ const executeTransactWrite = async ({ client, params }) => {
       cancellationReasons = JSON.parse(response.httpResponse.body.toString()).CancellationReasons;
     } catch (err) {
       // suppress this just in case some types of errors aren't JSON parseable
-      console.log('Error extracting cancellation error', err);
+      log('Error extracting cancellation error', err);
     }
   });
   return new Promise((resolve, reject) => {
