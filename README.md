@@ -26,7 +26,28 @@ This template project was created with two goals in mind: ***streamlined develop
 ## Standardized structure
 The project structure has been worked out as a result of years of development in Lambda environment using Serverless Framework. It also takes from the collective experience of the community (to whom I am grateful) embodied in books, talks, videos and articles.
 
-This template aims to deliver *common structure* that would speed up development by providing sensible defaults for boilerplate configurations. It defines *where what* should be placed (i.e. source code in `src/` folder, tests in `__tests__` etc.) so you don't need to waste time on thinking about it every time you start new project and creates common language for your team members. Thus, decreasing *cognitive overload* when switching between projects started from this template.
+This template aims to deliver ***common structure*** that would speed up development by providing sensible defaults for boilerplate configurations. It defines *where what* should be placed (i.e. source code in `src/` folder, tests in `__tests__` etc.) so you don't need to waste time on thinking about it every time you start new project and creates common language for your team members. Thus, decreasing *cognitive overload* when switching between projects started from this template.
+
+### Structure explanation
+There are some guidelines in terms of folders structure and naming conventions.
+
+|Path|Description|Reason|
+|-|-|-|
+|`./__tests__`|default folder name for tests when using `jest`. Substructure of this folder follows ***exactly*** the `./src/` structure.|Don't keep tests together with implementation. Easier to exclude during deployment. Easier to distinguish between code and implementation.|
+|`./config`|all additional config files for `jest` and deployment|`deployment.yml` is included in `serverless.yml`, it is separate because when you have multiple microservices making single system they should share same *stages* and *regions*. Also you can put VPC configuration there.|
+|`./documentation`|You may keep here any documentation about the project.||
+|`./src`|Implementation code goes here|This is a widespread convention.|
+|`./src/<functionName>/`|Each Lambda function has it's own folder|Better organization of the code.|
+|`./src/<functionName>/function.js`|Every file that implements Lambda's `handler` method is named `function.js`. The handler method name is always `handler`|Easy to find Lambda handlers.|
+|`./src/common/`|Place where common elements of implementation are stored. Most implementation code goes here. You should follow [Single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).|**Makes testing possible and really easy**!|
+|`./src/common/adapters/<name>Adapter.js`|For files implementing *technical* part of an Adapter in terms of Hexagonal Architecture|This should be very generic i.e. class that allows connections to MySQL **without** any particular SQL code that you want to execute in your usecase.|
+|`./src/common/entities/<EntityName>.js`|Here you keep files that represent objects stored in your *repository* (database)|Useful when you use database 😉|
+|`./src/common/services/<name>Service.js`|For files implementing *business* part of an Adapter in terms of Hexagonal Architecture|This service uses corresponding `<name>Adapter.js` adapter or adapters. You would put a specific SQL code here and pass it to adapter instance to execute it.|
+
+After working a lot with that structure I ***saw a pattern emerging*** that `<name>Adapter.js` together with `<name>Service.js` they both implement an adapter in terms of Hexagonal Architecture. Moreover, usually well written adapters (`<name>Adapter.js`) can be reused among different projects (can be put into separate NPM package).
+
+### File naming conventions
+If a file contains a `class` it should be named starting with big letter i.e `StorageService.js`. If file does not contain a class but one or many JavaScript functions name start from small letter i.e `s3Adapter.js`.
 
 ## Hexagonal architecture
 Design of the code has been planned with hexagonal architecture in mind. It allows better separation of concerns and makes it easier to write code that follows single responsibility principle. Those are crucial characteristics that create architectures which are easy to maintain, extend and test.
@@ -113,8 +134,8 @@ sls deploy -s <stage> # stage = dev | test | prod
 # What's included?
 
 Serverless Framework plugins:
-- serverless-iam-roles-per-function - to manage individual IAM roles for each function
-- serverless-export-env - to export Lambda functions environment variables in `.awsenv` file
+- [serverless-iam-roles-per-function](https://github.com/functionalone/serverless-iam-roles-per-function) - to manage individual IAM roles for each function
+- [serverless-export-env](https://github.com/arabold/serverless-export-env) - to export Lambda functions environment variables in `.awsenv` file
 
 
 Node.js development libraries:
