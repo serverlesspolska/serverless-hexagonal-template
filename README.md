@@ -26,7 +26,7 @@ sls deploy
 # High-level architecture
 This template implements depicted below architecture. The application itself is just an example used to show you how to test serverless architectures. 
 
-You can be easily modify the source code and tailor it to your needs.
+You can easily modify the source code and tailor it to your needs.
 ![High-level architecture](documentation/high-level.png)
 # Why use this template?
 This template project was created with two goals in mind: ***streamlined developer's flow*** and ***easy testing***, because, sadly, both are not common in serverless development yet. 
