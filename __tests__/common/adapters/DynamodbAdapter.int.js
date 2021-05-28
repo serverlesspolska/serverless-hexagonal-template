@@ -6,7 +6,7 @@ describe('DynamoDB Adapter', () => {
     const db = new DynamoDbAdapter()
 
     // WHEN
-    const results = await db.queryByField('PK', 'fake-fake-fake')
+    const results = await db.queryByField(process.env.tableName, 'PK', 'fake-fake-fake')
 
     // THEN
     expect(results).toBeTruthy()
@@ -35,7 +35,7 @@ describe('DynamoDB Adapter', () => {
     // WHEN
     const createResults = await db.create(paramsCreate)
     const deleteResults = await db.delete(paramsDelete)
-    const check = await db.queryByField('PK', 'SampleId')
+    const check = await db.queryByField(process.env.tableName, 'PK', 'SampleId')
 
     // THEN
     expect(createResults).toBeTruthy()
@@ -76,7 +76,7 @@ describe('DynamoDB Adapter', () => {
     const createResults = await db.create(paramsCreate)
     const getResults = await db.get(paramsGet)
     const deleteResults = await db.delete(paramsDelete)
-    const check = await db.queryByField('PK', 'SampleId')
+    const check = await db.queryByField(process.env.tableName, 'PK', 'SampleId')
 
     // THEN
     expect(createResults).toBeTruthy()

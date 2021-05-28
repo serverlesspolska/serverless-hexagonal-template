@@ -11,9 +11,9 @@ module.exports = class DynamoDbAdapter {
     })
   }
 
-  async queryByField(field, value) {
+  async queryByField(TableName, field, value) {
     const params = {
-      TableName: process.env.tableName,
+      TableName,
       // IndexName: indexName,
       KeyConditionExpression: '#field = :value',
       ExpressionAttributeNames: {
@@ -26,9 +26,9 @@ module.exports = class DynamoDbAdapter {
     return this.documentClient.query(params).promise()
   }
 
-  async queryIndexByField(field, value, indexName) {
+  async queryIndexByField(IndexName, field, value) {
     const params = {
-      IndexName: indexName,
+      IndexName,
       KeyConditionExpression: '#field = :value',
       ExpressionAttributeNames: {
         '#field': field
