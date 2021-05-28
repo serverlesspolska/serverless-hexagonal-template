@@ -1,4 +1,10 @@
 # serverless-hexagonal-template
+
+[![GitHub license](https://img.shields.io/github/license/serverlesspolska/serverless-hexagonal-template)](https://github.com/serverlesspolska/serverless-hexagonal-template/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/serverlesspolska/serverless-hexagonal-template)](https://github.com/serverlesspolska/serverless-hexagonal-template/stargazers)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+
 Highly opinionated project template for [Serverless Framework](https://www.serverless.com/) that applies **hexagonal architecture** principles to the serverless world. Crafted with easy testing in mind.
 
 # Quick start
@@ -20,7 +26,7 @@ sls deploy
 # High-level architecture
 This template implements depicted below architecture. The application itself is just an example used to show you how to test serverless architectures. 
 
-You can be easily modify the source code and tailor it to your needs.
+You can easily modify the source code and tailor it to your needs.
 ![High-level architecture](documentation/high-level.png)
 # Why use this template?
 This template project was created with two goals in mind: ***streamlined developer's flow*** and ***easy testing***, because, sadly, both are not common in serverless development yet. 
