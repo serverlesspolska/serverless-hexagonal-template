@@ -52,8 +52,6 @@ functions:
         Action:
           - dynamodb:PutItem
           - dynamodb:UpdateItem
-          - dynamodb:GetItem
-          - dynamodb:DeleteItem
         Resource: 
           - !GetAtt Table.Arn
 
