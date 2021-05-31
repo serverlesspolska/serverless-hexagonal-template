@@ -70,6 +70,13 @@ functions:
           arn: !GetAtt Table.StreamArn
           maximumRetryAttempts: 1
           batchSize: 1
+    iamRoleStatements:
+      - Sid: DynamoDBRead
+        Effect: Allow
+        Action:
+          - dynamodb:GetItem
+        Resource: 
+          - !GetAtt Table.Arn
 
 package:
   patterns:

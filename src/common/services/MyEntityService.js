@@ -16,8 +16,25 @@ module.exports = class MyEntityService {
   }
 
   async getById(id) {
-    const response = await this.dynamoDbAdapter.queryByField(this.tableName, 'PK', id)
-    const item = response.Items[0]
-    return new MyEntity({ id: item.PK, result: item.result, createdAt: item.createdAt })
+    const paramsGet = {
+      Key: {
+        PK: { S: id }
+      },
+      ReturnConsumedCapacity: 'TOTAL',
+      TableName: this.tableName
+    }
+    const response = await this.dynamoDbAdapter.get(paramsGet)
+    const item = response.Item
+
+    if (item) {
+      return new MyEntity({ id: item.PK.S, result: item.result.N, createdAt: item.createdAt.S });
+    }
+    return item;
+  }
+
+  async getByResult(value) {
+    const response = await this.dynamoDbAdapter.queryByField(this.tableName, 'result', value)
+    // eslint-disable-next-line max-len
+    return response.Items.map((item) => new MyEntity({ id: item.PK, result: item.result, createdAt: item.createdAt }))
   }
 }
