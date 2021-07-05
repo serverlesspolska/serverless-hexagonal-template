@@ -33,6 +33,7 @@ custom:
   tableName: ${self:service}-${self:provider.stage}
   export-env: # serverless-export-env config
     filename: .awsenv # custom filename to avoid conflict with Serverless Framework '.env' auto loading feature
+    overwrite: true
 
 functions:
   createItem:

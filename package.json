@@ -6,25 +6,25 @@
   "license": "MIT",
   "scripts": {
     "eslint": "node_modules/.bin/eslint src/**/*.js --ignore-pattern node_modules/",
-    "dotenv": "STAGE=${STAGE:=dev} && sls export-env -s $STAGE",
+    "dotenv": "STAGE=${STAGE:=dev} && sls export-env --all -s $STAGE",
     "test": "jest --config config/unit.jest.config.js",
     "integration": "npm run dotenv && jest --config config/integration.jest.config.js",
     "int": "jest --config config/integration.jest.config.js",
     "e2e": "jest --config config/e2e.jest.config.js",
-    "all": "npm run test && npm run int && npm run e2e"
+    "all": "npm run test && npm run integration && npm run e2e"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "aws-sdk": "^2.939.0",
     "aws-testing-library": "^1.1.1",
     "axios": "^0.21.1",
-    "dotenv": "^8.2.0",
+    "dotenv": "^10.0.0",
     "eslint": "^7.30.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.3",
-    "jest": "^27.0.1",
+    "eslint-plugin-import": "^2.23.4",
+    "jest": "^27.0.6",
     "serverless": "^2.50.0",
-    "serverless-export-env": "1.4.4",
+    "serverless-export-env": "^2.0.0",
     "serverless-iam-roles-per-function": "^3.2.0",
     "serverless-iam-test-helper": "^0.0.4"
   },
