@@ -29,10 +29,10 @@
     "serverless-iam-test-helper": "^0.0.4"
   },
   "dependencies": {
-    "@middy/core": "^2.2.0",
-    "@middy/http-error-handler": "^2.2.0",
-    "@middy/http-json-body-parser": "^2.2.0",
-    "@middy/validator": "^2.2.0",
+    "@middy/core": "^2.4.3",
+    "@middy/http-error-handler": "^2.4.3",
+    "@middy/http-json-body-parser": "^2.4.3",
+    "@middy/validator": "^2.4.3",
     "ksuid": "^2.0.0",
     "serverless-logger": "^1.1.1"
   }
