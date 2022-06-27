@@ -15,14 +15,14 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
-    "aws-sdk": "^2.939.0",
+    "aws-sdk": "^2.1162.0",
     "aws-testing-library": "^1.1.1",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "eslint": "^7.30.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.4",
-    "jest": "^27.0.6",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.1.1",
     "serverless": "^2.50.0",
     "serverless-export-env": "^2.0.0",
     "serverless-iam-roles-per-function": "^3.2.0",
@@ -34,6 +34,6 @@
     "@middy/http-json-body-parser": "^2.4.3",
     "@middy/validator": "^2.4.3",
     "ksuid": "^2.0.0",
-    "serverless-logger": "^1.1.1"
+    "serverless-logger": "^1.2.0"
   }
 }
