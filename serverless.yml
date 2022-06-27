@@ -1,5 +1,7 @@
 service: serverless-hexagonal-template
 
+frameworkVersion: '3'
+
 plugins:
   - serverless-iam-roles-per-function
   - serverless-export-env
@@ -7,12 +9,9 @@ plugins:
 provider:
   name: aws
   stage: ${opt:stage, 'dev'}
-  runtime: nodejs14.x
+  runtime: nodejs16.x
   profile: ${self:custom.deployment.profile.${self:provider.stage}}
   region: ${self:custom.deployment.region.${self:provider.stage}}
-  lambdaHashingVersion: 20201221
-  httpApi:
-    useProviderTags: true
   logRetentionInDays: 60 # how long logs are kept in CloudWatch
   environment:
     # required Environment Variables. Don't remove.
@@ -25,7 +24,7 @@ provider:
     Application: ${self:service}
     Stage: ${self:provider.stage}
 
-configValidationMode: off
+configValidationMode: warn
 
 custom:
   deployment: ${file(config/deployment.yml):deployment}
