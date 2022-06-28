@@ -7,6 +7,14 @@
 
 Highly opinionated project template for [Serverless Framework](https://www.serverless.com/) that applies **hexagonal architecture** principles to the serverless world. Crafted with easy testing in mind.
 
+# Updated to Serverless Framework V3
+
+This template has been updated and uses Serverless Framework V3. You can access most recent version of V2 compatible setup [here](https://github.com/serverlesspolska/serverless-hexagonal-template/releases/tag/ServerlessFrameworkV2). Significant changes:
+
+* Switched to Serverless Framework V3 (tested with `3.19.0`)
+* Updated all dependencies to newest versions
+* Added **feature allowing developers to work in parallel on isolated stages (environments)**. [More info here](#deployment)
+
 # Quick start
 
 This is a *template* from which you can create your own project by executing following command:
@@ -19,7 +27,7 @@ Next install dependencies:
 cd your-project-name
 npm i
 ```
-and deploy to `dev` stage in default region:
+and deploy to your `dev` stage in default region:
 ```
 sls deploy
 ```
@@ -118,6 +126,9 @@ Convenience command has been added for running all test. Please bare in mind it 
 ```
 npm run all
 ```
+**Note**: 
+> Tests will be executed against your individual development environment - [see section below](#deployment). If you want to execute all test on `dev` stage, please execute `npm run all-dev` command.
+
 #### DEBUG mode
 If you want to see logs when running tests on your local machines just set environment variable `DEBUG` to value `ON`. For example:
 ```
@@ -125,19 +136,38 @@ DEBUG=ON npm run test
  # or
 DEBUG=ON npm run integration
 ```
+
 #### GUI / acceptance tests
 End to end tests are not a substitution to GUI or acceptance tests. For those other solutions (such as AWS CloudWatch Synthetics) are needed.
 
 ## Deployment
+### Isolated per developer stages (multiple development environments)
+Many users asked me to add a **feature allowing developers to work in parallel on isolated stages**. Common *best practice* says that each developer should use a separate AWS account for development to avoid conflicts. Unfortunately, for many teams and companies, managing multiple AWS accounts poses a challenge of its own.
 
-Deployment to `dev` stage.
+In order to remove that obstacle, I decided to implement a simple solution that would allow many developers to use a single AWS account for development. **Remember, your production stage should be deployed on a different AWS account for security and performance reasons!**
+
+When executing the `serverless` or `sls` command without the` -s` (stage) parameter, your `username` will be used to name the stage. 
+
+> For example, my user name on my laptop is `pawel` therefore, the stage will be named `serverless-hexagonal-template-dev-pawel`. All settings such as `profile` and `region` will be inherited from the dev configuration.
+
+In that way, your colleagues can deploy their own stages (development environments) in the same region on the same AWS account without any conflicts (given that their usernames are unique in the scope of your project).
+
+To use that feature, simply execute command without providing any stage name:
 ```
 sls deploy
+```
+
+### Regular deployment
+Deployment to `dev` stage.
+```
+sls deploy -s dev
 ```
 Deployment to a specific stage
 ```
 sls deploy -s <stage> # stage = dev | test | prod
 ```
+
+The stages configuration is defined in `config/deployment.yml` file.
 
 # What's included?
 
@@ -152,5 +182,5 @@ Node.js development libraries:
 * Eslint with modified airbnb-base see `.eslintrc.yml`
 * Jest
 * dotenv
-* aws-testing-library for *end to end* testing
+* [aws-testing-library](https://github.com/erezrokah/aws-testing-library) for *end to end* testing
 * [serverless-logger](https://github.com/serverlesspolska/serverless-logger)
