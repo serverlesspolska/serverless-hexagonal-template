@@ -6,12 +6,14 @@
   "license": "MIT",
   "scripts": {
     "eslint": "node_modules/.bin/eslint src/**/*.js --ignore-pattern node_modules/",
-    "dotenv": "STAGE=${STAGE:=dev} && sls export-env --all -s $STAGE",
+    "export-env-dev": "STAGE=${STAGE:=dev} && sls export-env --all -s $STAGE",
+    "export-env-local": "sls export-env --all",
     "test": "jest --config config/unit.jest.config.js",
-    "integration": "npm run dotenv && jest --config config/integration.jest.config.js",
+    "integration": "npm run export-env-local && jest --config config/integration.jest.config.js",
     "int": "jest --config config/integration.jest.config.js",
     "e2e": "jest --config config/e2e.jest.config.js",
-    "all": "npm run test && npm run integration && npm run e2e"
+    "all": "npm run test && npm run integration && npm run e2e",
+    "all-dev": "npm run test && npm run export-env-dev && npm run int && npm run e2e"
   },
   "devDependencies": {
     "@types/jest": "^28.1.3",
