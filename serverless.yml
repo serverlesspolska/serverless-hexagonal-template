@@ -1,17 +1,18 @@
 service: serverless-hexagonal-template
 
-frameworkVersion: '>=3.19.0'
+frameworkVersion: '^3'
 
 plugins:
   - serverless-iam-roles-per-function
   - serverless-export-env
+  - serverless-plugin-typescript
 
 provider:
   name: aws
   stage: ${opt:stage, file(./config/stage.js):userStage}
-  runtime: nodejs16.x
+  runtime: nodejs20.x
   profile: ${self:custom.deployment.profile.${self:custom.globalStage}}
-  region: ${self:custom.deployment.region.${self:custom.globalStage}}
+  region: ${opt:region, self:custom.deployment.region.${self:custom.globalStage}}
   logRetentionInDays: 60 # how long logs are kept in CloudWatch
   environment:
     # required Environment Variables. Don't remove.
@@ -37,7 +38,7 @@ custom:
 
 functions:
   createItem:
-    handler: src/createItem/function.handler
+    handler: src/createItem/index.handler
     description: Create Item in repository
     memorySize: 128
     timeout: 5
@@ -57,7 +58,7 @@ functions:
           - !GetAtt Table.Arn
 
   processItem:
-    handler: src/processItem/function.handler
+    handler: src/processItem/index.handler
     description: Triggered by DynamoDB Streams. Does some work on newly created Item
     memorySize: 128
     timeout: 5
@@ -79,10 +80,7 @@ functions:
 
 package:
   patterns:
-    # include
-    - src/**
     # exclude
-    - '!*'
     - '!__tests__/**'
     - '!documentation/**'
     - '!config/**'

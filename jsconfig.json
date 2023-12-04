@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2020"
+    "module": "ES2022",
+    "target": "ES2022"
   },
   "include": [
     "src/**/*",

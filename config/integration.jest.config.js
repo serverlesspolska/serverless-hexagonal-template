@@ -1,7 +1,7 @@
-const { config } = require('dotenv');
-const { resolve } = require('path');
+import { config } from 'dotenv';
+import { resolve } from 'path';
 
-module.exports = {
+export default {
   testEnvironment: 'node',
   roots: ['../__tests__/'],
   testMatch: ['**/*.(int|integration).js'],
