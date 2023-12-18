@@ -1,6 +1,4 @@
-const log = require('serverless-logger')(__filename)
-
-const businessLogic = require('../../src/createItem/businessLogic.mjs')
+const businessLogic = require('../../src/createItem/businessLogic.js')
 
 describe('Creat Item buiness logic suite', () => {
   it('should add numbers', () => {

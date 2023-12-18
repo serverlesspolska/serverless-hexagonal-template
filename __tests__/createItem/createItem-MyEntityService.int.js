@@ -1,7 +1,6 @@
-const log = require('serverless-logger')(__filename)
 const IamTestHelper = require('serverless-iam-test-helper')
 
-const MyEntityService = require('../../src/common/services/MyEntityService.mjs')
+const MyEntityService = require('../../src/common/services/MyEntityService.js')
 
 describe('CreateItem Lambda IAM Role', () => {
   beforeAll(async () => {

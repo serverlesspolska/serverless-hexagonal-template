@@ -1,4 +1,3 @@
-
 export const performCalculation = ({ a, b, method }) => {
   console.log(`Received method="${method}" and values: a=${a}; b=${b}`)
   switch (method) {

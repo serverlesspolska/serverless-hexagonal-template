@@ -1,4 +1,3 @@
-
 export const handler = async (event) => {
   const item = parseEvent(event)
   console.log('item', JSON.stringify(item))

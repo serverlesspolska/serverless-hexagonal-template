@@ -3,8 +3,8 @@ import jsonBodyParser from '@middy/http-json-body-parser'
 import httpErrorHandler from '@middy/http-error-handler'
 import validatorMiddleware from '@middy/validator'
 import { transpileSchema } from '@middy/validator/transpile'
-import { performCalculation } from './businessLogic.mjs'
-import { MyEntityService } from '../common/services/MyEntityService.mjs'
+import { performCalculation } from './businessLogic.js'
+import { MyEntityService } from '../common/services/MyEntityService.js'
 
 const lambdaHandler = async (event) => {
   console.log('Starting Lambda function')
