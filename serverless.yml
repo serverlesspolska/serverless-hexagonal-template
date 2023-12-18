@@ -5,7 +5,6 @@ frameworkVersion: '^3'
 plugins:
   - serverless-iam-roles-per-function
   - serverless-export-env
-  - serverless-plugin-typescript
 
 provider:
   name: aws

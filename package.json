@@ -31,8 +31,7 @@
     "serverless": "^3.38.0",
     "serverless-export-env": "^2.2.0",
     "serverless-iam-roles-per-function": "^3.2.0",
-    "serverless-iam-test-helper": "^0.0.4",
-    "serverless-plugin-typescript": "^2.1.5"
+    "serverless-iam-test-helper": "^0.0.4"
   },
   "dependencies": {
     "@middy/core": "^5.1.0",

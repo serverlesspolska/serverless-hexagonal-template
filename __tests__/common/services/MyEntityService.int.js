@@ -1,4 +1,4 @@
-const MyEntityService = require('../../../src/common/services/MyEntityService')
+const MyEntityService = require('../../../src/common/services/MyEntityService.mjs')
 
 describe('MyEntity service', () => {
   it('should create and save new entity', async () => {
