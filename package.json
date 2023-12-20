@@ -12,7 +12,7 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/unit.jest.config.js",
     "integration": "npm run export-env-local && jest --config config/integration.jest.config.js",
     "int": "jest --config config/integration.jest.config.js",
-    "e2e": "jest --config config/e2e.jest.config.js",
+    "e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/e2e.jest.config.mjs",
     "all": "npm run test && npm run integration && npm run e2e",
     "all-dev": "npm run test && npm run export-env-dev && npm run int && npm run e2e"
   },
