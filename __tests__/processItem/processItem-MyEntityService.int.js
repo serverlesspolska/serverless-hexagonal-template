@@ -1,6 +1,6 @@
 const IamTestHelper = require('serverless-iam-test-helper')
 
-const MyEntityService = require('../../src/common/services/MyEntityService.js')
+const MyEntityService = require('../../src/common/services/MyEntityService.mjs')
 
 describe('ProcessItem Lambda IAM Role', () => {
   beforeAll(async () => {

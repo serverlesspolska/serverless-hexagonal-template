@@ -1,5 +1,5 @@
 export default {
   testEnvironment: 'node',
   roots: ['../'],
-  testMatch: ['**/*.test.js']
+  testMatch: ['**/*.test.js', '**/*.test.mjs']
 }
