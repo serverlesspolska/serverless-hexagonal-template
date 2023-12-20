@@ -37,7 +37,7 @@ custom:
 
 functions:
   createItem:
-    handler: src/createItem/index.handler
+    handler: src/createItem/function.handler
     description: Create Item in repository
     memorySize: 128
     timeout: 5
@@ -57,7 +57,7 @@ functions:
           - !GetAtt Table.Arn
 
   processItem:
-    handler: src/processItem/index.handler
+    handler: src/processItem/function.handler
     description: Triggered by DynamoDB Streams. Does some work on newly created Item
     memorySize: 128
     timeout: 5
