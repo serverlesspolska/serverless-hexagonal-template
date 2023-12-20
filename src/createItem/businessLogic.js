@@ -1,7 +1,5 @@
-const log = require('serverless-logger')(__filename)
-
-const performCalculation = ({ a, b, method }) => {
-  log(`Received method="${method}" and values: a=${a}; b=${b}`)
+export const performCalculation = ({ a, b, method }) => {
+  console.log(`Received method="${method}" and values: a=${a}; b=${b}`)
   switch (method) {
     case 'add':
       return a + b
@@ -20,5 +18,3 @@ class NotImplementedYetError extends Error {
     this.message = 'Not implemented yet!'
   }
 }
-
-module.exports = { performCalculation }

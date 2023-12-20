@@ -1,8 +1,8 @@
-const os = require('os');
+import { userInfo } from 'os';
 
 const stage = () => {
   console.log(`Stage not provided. Using "local" stage name based on username: 'dev-${os.userInfo().username}'.`);
-  return `dev-${os.userInfo().username}`
+  return `dev-${userInfo().username}`
 }
 
-module.exports.userStage = stage
+export const userStage = stage

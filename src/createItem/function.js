@@ -1,14 +1,14 @@
-const middy = require('@middy/core')
-const validator = require('@middy/validator')
-const httpJsonBodyParser = require('@middy/http-json-body-parser')
-const httpErrorHandler = require('@middy/http-error-handler')
-const log = require('serverless-logger')(__filename)
-const businessLogic = require('./businessLogic')
-const MyEntityService = require('../common/services/MyEntityService')
+import middy from '@middy/core'
+import jsonBodyParser from '@middy/http-json-body-parser'
+import httpErrorHandler from '@middy/http-error-handler'
+import validatorMiddleware from '@middy/validator'
+import { transpileSchema } from '@middy/validator/transpile'
+import { performCalculation } from './businessLogic.js'
+import { MyEntityService } from '../common/services/MyEntityService.js'
 
-const handler = async (event) => {
-  log('Starting Lambda function')
-  const result = businessLogic.performCalculation(event.body)
+const lambdaHandler = async (event) => {
+  console.log('Starting Lambda function')
+  const result = performCalculation(event.body)
   const myEntityService = new MyEntityService()
   return myEntityService.create(result)
 }
@@ -28,7 +28,10 @@ const inputSchema = {
   }
 }
 
-module.exports.handler = middy(handler)
-  .use(httpJsonBodyParser())
-  .use(validator({ inputSchema }))
+export const handler = middy()
+  .use(jsonBodyParser())
+  .use(validatorMiddleware({
+    eventSchema: transpileSchema(inputSchema)
+  }))
   .use(httpErrorHandler())
+  .handler(lambdaHandler)

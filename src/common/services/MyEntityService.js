@@ -1,15 +1,14 @@
-const log = require('serverless-logger')(__filename)
-const DynamoDbAdapter = require('../adapters/DynamoDbAdapter')
-const MyEntity = require('../entities/MyEntity')
+import { DynamoDbAdapter } from '../adapters/DynamoDbAdapter.js';
+import { MyEntity } from '../entities/MyEntity.js'
 
-module.exports = class MyEntityService {
+export class MyEntityService {
   constructor(dynamoDbAdapter) {
     this.dynamoDbAdapter = dynamoDbAdapter || new DynamoDbAdapter()
     this.tableName = process.env.tableName
   }
 
   async create(result) {
-    log('Creating MyEntity item in repository')
+    console.log('Creating MyEntity item in repository')
     const myEntity = new MyEntity({ result })
     await this.dynamoDbAdapter.createItem(this.tableName, myEntity)
     return myEntity

@@ -1,6 +1,6 @@
 service: serverless-hexagonal-template
 
-frameworkVersion: '>=3.19.0'
+frameworkVersion: '^3'
 
 plugins:
   - serverless-iam-roles-per-function
@@ -9,9 +9,9 @@ plugins:
 provider:
   name: aws
   stage: ${opt:stage, file(./config/stage.js):userStage}
-  runtime: nodejs16.x
+  runtime: nodejs20.x
   profile: ${self:custom.deployment.profile.${self:custom.globalStage}}
-  region: ${self:custom.deployment.region.${self:custom.globalStage}}
+  region: ${opt:region, self:custom.deployment.region.${self:custom.globalStage}}
   logRetentionInDays: 60 # how long logs are kept in CloudWatch
   environment:
     # required Environment Variables. Don't remove.
@@ -79,10 +79,7 @@ functions:
 
 package:
   patterns:
-    # include
-    - src/**
     # exclude
-    - '!*'
     - '!__tests__/**'
     - '!documentation/**'
     - '!config/**'

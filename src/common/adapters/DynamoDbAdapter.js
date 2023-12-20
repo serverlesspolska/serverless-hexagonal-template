@@ -1,14 +1,15 @@
-const AWS = require('aws-sdk')
-const log = require('serverless-logger')(__filename)
+import {
+  TransactWriteItemsCommand, GetItemCommand, PutItemCommand, UpdateItemCommand,
+  DeleteItemCommand, DynamoDBClient
+} from '@aws-sdk/client-dynamodb';
+import { QueryCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 
-module.exports = class DynamoDbAdapter {
+export class DynamoDbAdapter {
   constructor() {
-    this.documentClient = new AWS.DynamoDB.DocumentClient({
+    this.client = new DynamoDBClient({
       region: process.env.region
-    })
-    this.client = new AWS.DynamoDB({
-      region: process.env.region
-    })
+    });
+    this.documentClient = DynamoDBDocumentClient.from(this.client);
   }
 
   async queryByField(TableName, field, value) {
@@ -22,8 +23,8 @@ module.exports = class DynamoDbAdapter {
       ExpressionAttributeValues: {
         ':value': value
       }
-    }
-    return this.documentClient.query(params).promise()
+    };
+    return this.query(params);
   }
 
   async queryIndexByField(IndexName, field, value) {
@@ -36,20 +37,20 @@ module.exports = class DynamoDbAdapter {
       ExpressionAttributeValues: {
         ':value': value
       }
-    }
-    return this.documentClient.query(params).promise()
+    };
+    return this.query(params);
   }
 
   async query(params) {
-    return this.document.query(params).promise()
+    return this.documentClient.send(new QueryCommand(params))
   }
 
   async get(params) {
-    return this.client.getItem(params).promise()
+    return this.client.send(new GetItemCommand(params));
   }
 
   async createItem(tableName, entity) {
-    log(`Saving new item id="${entity.id}" into DynamoDB table ${tableName}`)
+    console.log(`Saving new item id="${entity.id}" into DynamoDB table ${tableName}`)
     const params = {
       Item: entity.toItem(),
       ReturnConsumedCapacity: 'TOTAL',
@@ -57,52 +58,29 @@ module.exports = class DynamoDbAdapter {
     }
     try {
       await this.create(params)
-      log('Item saved successfully')
+      console.log('Item saved successfully')
       return entity
     } catch (error) {
-      log('Error', error)
+      console.log('Error', error)
       throw error
     }
   }
 
   async create(params) {
-    return this.client.putItem(params).promise()
+    return this.client.send(new PutItemCommand(params))
   }
 
   async delete(params) {
-    log(`Deleting item with PK = ${params.Key.PK.S} & SK = ${params.Key.SK ? params.Key.SK.S : 'not present'}`)
-    return this.client.deleteItem(params).promise()
+    console.log(`Deleting item with PK = ${params.Key.PK.S} & SK = ${params.Key.SK ? params.Key.SK.S : 'not present'}`)
+    return this.client.send(new DeleteItemCommand(params))
   }
 
   async update(params) {
-    return this.client.updateItem(params).promise()
+    return this.client.send(new UpdateItemCommand(params))
   }
 
   async transactWrite(params) {
-    return executeTransactWrite({ client: this.client, params })
+    const transactionCommand = new TransactWriteItemsCommand(params);
+    return this.client.send(transactionCommand)
   }
-}
-
-// Thanks Alex DeBrie and his DynamoDB Book for this code below
-// Alex: Thanks, Paul Swail! https://github.com/aws/aws-sdk-js/issues/2464#issuecomment-503524701
-const executeTransactWrite = async ({ client, params }) => {
-  const transactionRequest = client.transactWriteItems(params);
-  let cancellationReasons;
-  transactionRequest.on('extractError', (response) => {
-    try {
-      cancellationReasons = JSON.parse(response.httpResponse.body.toString()).CancellationReasons;
-    } catch (err) {
-      // suppress this just in case some types of errors aren't JSON parseable
-      log('Error extracting cancellation error', err);
-    }
-  });
-  return new Promise((resolve, reject) => {
-    transactionRequest.send((err, response) => {
-      if (err) {
-        err.cancellationReasons = cancellationReasons
-        return reject(err);
-      }
-      return resolve(response);
-    });
-  });
 }

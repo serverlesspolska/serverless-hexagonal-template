@@ -1,4 +1,4 @@
-const MyEntity = require('../../../src/common/entities/MyEntity')
+const MyEntity = require('../../../src/common/entities/MyEntity.js')
 
 describe('My Entity', () => {
   it('should be created from parameters', () => {

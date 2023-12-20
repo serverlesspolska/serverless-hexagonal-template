@@ -19,3 +19,4 @@ rules:
   comma-dangle: off
   no-console: off
   import/no-extraneous-dependencies: off
+  import/extensions: off
