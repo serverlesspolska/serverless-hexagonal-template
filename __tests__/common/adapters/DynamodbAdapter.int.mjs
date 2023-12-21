@@ -1,4 +1,4 @@
-const DynamoDbAdapter = require('../../../src/common/adapters/DynamoDbAdapter.mjs')
+import { DynamoDbAdapter } from '../../../src/common/adapters/DynamoDbAdapter.mjs'
 
 describe('DynamoDB Adapter', () => {
   it('should query by field', async () => {
