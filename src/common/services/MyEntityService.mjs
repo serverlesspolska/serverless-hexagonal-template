@@ -1,5 +1,5 @@
-import { DynamoDbAdapter } from '../adapters/DynamoDbAdapter.js';
-import { MyEntity } from '../entities/MyEntity.js'
+import { DynamoDbAdapter } from '../adapters/DynamoDbAdapter.mjs';
+import { MyEntity } from '../entities/MyEntity.mjs'
 
 export class MyEntityService {
   constructor(dynamoDbAdapter) {

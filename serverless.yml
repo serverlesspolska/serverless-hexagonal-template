@@ -8,7 +8,7 @@ plugins:
 
 provider:
   name: aws
-  stage: ${opt:stage, file(./config/stage.js):userStage}
+  stage: ${opt:stage, file(./config/stage.cjs):userStage}
   runtime: nodejs20.x
   profile: ${self:custom.deployment.profile.${self:custom.globalStage}}
   region: ${opt:region, self:custom.deployment.region.${self:custom.globalStage}}

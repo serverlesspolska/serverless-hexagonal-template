@@ -1,4 +1,4 @@
-const { default: axios } = require('axios')
+import axios from 'axios'
 
 axios.defaults.baseURL = `https://${process.env.httpApiGatewayEndpointId}.execute-api.${process.env.region}.amazonaws.com`
 
