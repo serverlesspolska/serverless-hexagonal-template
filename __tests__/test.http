@@ -1,0 +1,10 @@
+
+###
+POST https://738tm5k3i8.execute-api.eu-central-1.amazonaws.com/item
+content-type: application/json
+
+{
+  "a": 10,
+  "b": 5,
+  "method": "add"
+}
