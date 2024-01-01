@@ -1,5 +1,9 @@
+import { Logger } from '@aws-lambda-powertools/logger'
+
 import { DynamoDbAdapter } from '../adapters/DynamoDbAdapter.mjs';
 import { MyEntity } from '../entities/MyEntity.mjs'
+
+const logger = new Logger()
 
 export class MyEntityService {
   constructor(dynamoDbAdapter) {
@@ -8,7 +12,7 @@ export class MyEntityService {
   }
 
   async create(result) {
-    console.log('Creating MyEntity item in repository')
+    logger.info('Creating MyEntity item in repository')
     const myEntity = new MyEntity({ result })
     await this.dynamoDbAdapter.createItem(this.tableName, myEntity)
     return myEntity

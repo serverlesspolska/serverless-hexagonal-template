@@ -3,6 +3,9 @@ import {
   DeleteItemCommand, DynamoDBClient
 } from '@aws-sdk/client-dynamodb';
 import { QueryCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
+import { Logger } from '@aws-lambda-powertools/logger'
+
+const logger = new Logger()
 
 export class DynamoDbAdapter {
   constructor() {
@@ -50,7 +53,10 @@ export class DynamoDbAdapter {
   }
 
   async createItem(tableName, entity) {
-    console.log(`Saving new item id="${entity.id}" into DynamoDB table ${tableName}`)
+    logger.info('Saving new item into DynamoDB Table', {
+      itemId: entity.id,
+      tableName,
+    })
     const params = {
       Item: entity.toItem(),
       ReturnConsumedCapacity: 'TOTAL',
@@ -58,10 +64,10 @@ export class DynamoDbAdapter {
     }
     try {
       await this.create(params)
-      console.log('Item saved successfully')
+      logger.info('Item saved successfully')
       return entity
     } catch (error) {
-      console.log('Error', error)
+      logger.info('Error', error)
       throw error
     }
   }
@@ -71,7 +77,11 @@ export class DynamoDbAdapter {
   }
 
   async delete(params) {
-    console.log(`Deleting item with PK = ${params.Key.PK.S} & SK = ${params.Key.SK ? params.Key.SK.S : 'not present'}`)
+    logger.info('Deleting item', {
+      PK: params.Key.PK.S,
+      SK: params.Key.SK ? params.Key.SK.S : 'not present',
+      tableName: params.TableName,
+    })
     return this.client.send(new DeleteItemCommand(params))
   }
 
