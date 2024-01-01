@@ -37,5 +37,5 @@ export const handler = middy()
   .use(validatorMiddleware({
     eventSchema: transpileSchema(inputSchema)
   }))
-  .use(httpErrorHandler({ logger: (...args) => logger.error(args)}))
+  .use(httpErrorHandler({ logger: (...args) => logger.error(args) }))
   .handler(lambdaHandler)
