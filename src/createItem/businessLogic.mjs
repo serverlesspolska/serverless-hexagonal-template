@@ -1,5 +1,15 @@
+import { Logger } from '@aws-lambda-powertools/logger'
+
+const logger = new Logger()
+
 export const performCalculation = ({ a, b, method }) => {
-  console.log(`Received method="${method}" and values: a=${a}; b=${b}`)
+  logger.info('Received method with values', {
+    method,
+    values: {
+      a,
+      b,
+    }
+  })
   switch (method) {
     case 'add':
       return a + b

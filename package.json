@@ -21,7 +21,6 @@
     "@aws-sdk/lib-dynamodb": "^3.465.0",
     "@types/jest": "^29.5.11",
     "aws-testing-library": "gerwant/aws-testing-library#modernization",
-    "axios": "^1.6.2",
     "dotenv": "^16.0.1",
     "eslint": "^8.55.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -33,6 +32,7 @@
     "serverless-iam-test-helper": "^0.0.4"
   },
   "dependencies": {
+    "@aws-lambda-powertools/logger": "^1.17.0",
     "@middy/core": "^5.1.0",
     "@middy/http-error-handler": "^5.1.0",
     "@middy/http-json-body-parser": "^5.1.0",

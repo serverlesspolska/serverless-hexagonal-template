@@ -3,11 +3,15 @@ import jsonBodyParser from '@middy/http-json-body-parser'
 import httpErrorHandler from '@middy/http-error-handler'
 import validatorMiddleware from '@middy/validator'
 import { transpileSchema } from '@middy/validator/transpile'
+import { Logger } from '@aws-lambda-powertools/logger'
+
 import { performCalculation } from './businessLogic.mjs'
 import { MyEntityService } from '../common/services/MyEntityService.mjs'
 
+const logger = new Logger()
+
 const lambdaHandler = async (event) => {
-  console.log('Starting Lambda function')
+  logger.info('Starting Lambda function')
   const result = performCalculation(event.body)
   const myEntityService = new MyEntityService()
   return myEntityService.create(result)
@@ -33,5 +37,5 @@ export const handler = middy()
   .use(validatorMiddleware({
     eventSchema: transpileSchema(inputSchema)
   }))
-  .use(httpErrorHandler())
+  .use(httpErrorHandler({ logger: (...args) => logger.error(args) }))
   .handler(lambdaHandler)
