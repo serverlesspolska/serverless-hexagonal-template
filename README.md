@@ -141,6 +141,8 @@ DEBUG=ON npm run integration
 End to end tests are not a substitution to GUI or acceptance tests. For those other solutions (such as AWS CloudWatch Synthetics) are needed.
 
 ## Deployment
+### Prerequisite
+Before doing deployment please execute `npm i` to install fresh dependencies. Next please execute `npm run build`  to pre-transpile JSON schemas used by Validator from Middy. 
 ### Isolated per developer stages (multiple development environments)
 Many users asked me to add a **feature allowing developers to work in parallel on isolated stages**. Common *best practice* says that each developer should use a separate AWS account for development to avoid conflicts. Unfortunately, for many teams and companies, managing multiple AWS accounts poses a challenge of its own.
 
