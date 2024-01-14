@@ -9,17 +9,20 @@
     "eslint": "node_modules/.bin/eslint src/**/*.mjs --ignore-pattern node_modules/",
     "export-env-dev": "STAGE=${STAGE:=dev} && sls export-env --all -s $STAGE",
     "export-env-local": "sls export-env --all",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/unit.jest.config.js",
+    "test": "npm run build && node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/unit.jest.config.js",
     "integration": "npm run export-env-local && node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/integration.jest.config.mjs",
     "int": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/integration.jest.config.mjs",
     "e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/e2e.jest.config.mjs",
     "all": "npm run test && npm run integration && npm run e2e",
-    "all-dev": "npm run test && npm run export-env-dev && npm run int && npm run e2e"
+    "all-dev": "npm run test && npm run export-env-dev && npm run int && npm run e2e",
+    "build": "./build.sh",
+    "deploy:dev": "npm i && npm run build && sls deploy -s dev"
   },
   "devDependencies": {
     "@aws-sdk/client-dynamodb": "^3.465.0",
     "@aws-sdk/lib-dynamodb": "^3.465.0",
     "@types/jest": "^29.5.11",
+    "ajv-cmd": "^0.3.4",
     "aws-testing-library": "gerwant/aws-testing-library#modernization",
     "dotenv": "^16.0.1",
     "eslint": "^8.55.0",
