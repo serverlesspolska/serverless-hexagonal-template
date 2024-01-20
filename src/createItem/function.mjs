@@ -6,7 +6,7 @@ import { Logger } from '@aws-lambda-powertools/logger'
 
 import { performCalculation } from './businessLogic.mjs'
 import { MyEntityService } from '../common/services/MyEntityService.mjs'
-import inputSchema from './schema.inputSchema.js'
+import inputSchema from './schema.inputSchema.mjs'
 
 const logger = new Logger()
 
