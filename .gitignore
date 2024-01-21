@@ -18,3 +18,9 @@ jspm_packages
 .DS_store
 .DS_Store
 template.drawio.bak
+
+# schemas
+schema.*.mjs
+
+# build
+dist
