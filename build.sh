@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# This is an example, should be customize to meet ones needs
-# Powered by `ajv-cmd`
-# $ ajv --help
+# This build script finds all files with name in format schema.*.json and pre-transpiles the schemas
+# from json into mjs files using ajv-cmd. The output files are in the same directory as the source
+# json files. They have the same name but different extension.
 
 bundle () {
   ajv validate ${1} --valid \
