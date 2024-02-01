@@ -15,8 +15,7 @@
     "e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/e2e.jest.config.mjs",
     "all": "npm run test && npm run integration && npm run e2e",
     "all-dev": "npm run test && npm run export-env-dev && npm run int && npm run e2e",
-    "build": "npm i && ./build.sh",
-    "deploy:dev": "npm run build && sls deploy -s dev"
+    "build": "npm i && ./build.sh"
   },
   "devDependencies": {
     "@aws-sdk/client-dynamodb": "^3.465.0",
