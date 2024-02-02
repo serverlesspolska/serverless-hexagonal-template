@@ -1,12 +1,12 @@
 import middy from '@middy/core'
 import jsonBodyParser from '@middy/http-json-body-parser'
 import httpErrorHandler from '@middy/http-error-handler'
-import validatorMiddleware from '@middy/validator'
+import validator from 'middy-ajv'
 import { Logger } from '@aws-lambda-powertools/logger'
 
 import { performCalculation } from './businessLogic.mjs'
 import { MyEntityService } from '../common/services/MyEntityService.mjs'
-import inputSchema from './schema.inputSchema.mjs'
+import eventSchema from './schema.inputSchema.mjs'
 
 const logger = new Logger()
 
@@ -19,8 +19,6 @@ const lambdaHandler = async (event) => {
 
 export const handler = middy()
   .use(jsonBodyParser())
-  .use(validatorMiddleware({
-    eventSchema: inputSchema
-  }))
+  .use(validator({ eventSchema })) // TODO implement responseSchema as well (best practice)
   .use(httpErrorHandler({ logger: (...args) => logger.error(args) }))
   .handler(lambdaHandler)
