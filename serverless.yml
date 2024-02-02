@@ -48,6 +48,9 @@ package:
     - '!__tests__/**'
     - '!documentation/**'
     - '!config/**'
+    - '!iac/**'
+    - '!src/**/schema.*.json'
+    - '!*'
 
 resources:
   - Description: ${self:custom.description}
