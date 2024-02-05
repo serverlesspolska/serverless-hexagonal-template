@@ -38,7 +38,7 @@ custom:
     overwrite: true
   scripts:
     hooks:
-      'package:createDeploymentArtifacts': npm run build
+      'before:package:createDeploymentArtifacts': npm run build
 
 functions: ${file(iac/functions.yml)}
 
