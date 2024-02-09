@@ -1,19 +1,14 @@
-import { IamTestHelper } from 'serverless-iam-test-helper';
+import IamTestHelper from 'serverless-iam-test-helper';
 
 import { MyEntityService } from '../../src/common/services/MyEntityService.mjs';
 
 describe('ProcessItem Lambda IAM Role', () => {
   beforeAll(async () => {
-    const { credentials } = await IamTestHelper.assumeRoleByLambdaName('processItem')
-    process.env.AWS_ACCESS_KEY_ID = credentials.accessKeyId
-    process.env.AWS_SECRET_ACCESS_KEY = credentials.secretAccessKey
-    process.env.AWS_SESSION_TOKEN = credentials.sessionToken
+    await IamTestHelper.assumeRoleByLambdaName('processItem')
   });
 
   afterAll(() => {
-    delete process.env.AWS_ACCESS_KEY_ID
-    delete process.env.AWS_SECRET_ACCESS_KEY
-    delete process.env.AWS_SESSION_TOKEN
+    IamTestHelper.leaveLambdaRole()
   })
 
   it('should ALLOW dynamodb:GetItem', async () => {
