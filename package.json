@@ -41,7 +41,6 @@
     "@middy/core": "^5.1.0",
     "@middy/http-error-handler": "^5.1.0",
     "@middy/http-json-body-parser": "^5.1.0",
-    "esbuild-plugin-polyfill-node": "^0.3.0",
     "ksuid": "^3.0.0",
     "middy-ajv": "^3.0.0"
   }
