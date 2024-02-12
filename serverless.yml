@@ -41,8 +41,10 @@ custom:
     hooks:
       'before:package:createDeploymentArtifacts': npm run build
   esbuild:
-    bundle: true
-    minify: false
+    format: esm
+    outputFileExtension: '.mjs'
+    banner:
+      js: "import { createRequire } from 'module';const require = createRequire(import.meta.url);"
 
 functions: ${file(iac/functions.yml)}
 

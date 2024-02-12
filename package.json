@@ -6,13 +6,13 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "eslint": "node_modules/.bin/eslint src/**/*.mjs --ignore-pattern node_modules/",
+    "eslint": "node_modules/.bin/eslint src/**/*.js --ignore-pattern node_modules/",
     "export-env-dev": "STAGE=${STAGE:=dev} && sls export-env --all -s $STAGE",
     "export-env-local": "sls export-env --all",
     "test": "npm run build && node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/unit.jest.config.js",
-    "integration": "npm run export-env-local && node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/integration.jest.config.mjs",
-    "int": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/integration.jest.config.mjs",
-    "e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/e2e.jest.config.mjs",
+    "integration": "npm run export-env-local && node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/integration.jest.config.js",
+    "int": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/integration.jest.config.js",
+    "e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config config/e2e.jest.config.js",
     "all": "npm run test && npm run integration && npm run e2e",
     "all-dev": "npm run test && npm run export-env-dev && npm run int && npm run e2e",
     "build": "npm i && ./build.sh"
@@ -41,6 +41,7 @@
     "@middy/core": "^5.1.0",
     "@middy/http-error-handler": "^5.1.0",
     "@middy/http-json-body-parser": "^5.1.0",
+    "esbuild-plugin-polyfill-node": "^0.3.0",
     "ksuid": "^3.0.0",
     "middy-ajv": "^3.0.0"
   }

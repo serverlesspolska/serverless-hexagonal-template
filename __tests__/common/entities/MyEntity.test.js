@@ -1,4 +1,4 @@
-import { MyEntity } from '../../../src/common/entities/MyEntity.mjs'
+import { MyEntity } from '../../../src/common/entities/MyEntity.js'
 
 describe('My Entity', () => {
   it('should be created from parameters', () => {

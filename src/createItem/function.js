@@ -4,9 +4,9 @@ import httpErrorHandler from '@middy/http-error-handler'
 import validator from 'middy-ajv'
 import { Logger } from '@aws-lambda-powertools/logger'
 
-import { performCalculation } from './businessLogic.mjs'
-import { MyEntityService } from '../common/services/MyEntityService.mjs'
-import eventSchema from './schema.inputSchema.mjs'
+import { performCalculation } from './businessLogic.js'
+import { MyEntityService } from '../common/services/MyEntityService.js'
+import eventSchema from './schema.inputSchema.js'
 
 const logger = new Logger()
 

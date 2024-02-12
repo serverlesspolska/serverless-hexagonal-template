@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 export default {
   testEnvironment: 'node',
   roots: ['../__tests__/'],
-  testMatch: ['**/*.(e2e).mjs'],
+  testMatch: ['**/*.(e2e).js'],
   testTimeout: 60000 * 7, // 7 minutes timeout
   // Enable this if you're using aws-testing-library
   setupFilesAfterEnv: ['../node_modules/aws-testing-library/lib/jest/index.js'],

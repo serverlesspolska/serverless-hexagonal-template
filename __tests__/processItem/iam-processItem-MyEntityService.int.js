@@ -1,6 +1,6 @@
 import IamTestHelper from 'serverless-iam-test-helper';
 
-import { MyEntityService } from '../../src/common/services/MyEntityService.mjs';
+import { MyEntityService } from '../../src/common/services/MyEntityService.js';
 
 describe('ProcessItem Lambda IAM Role', () => {
   beforeAll(async () => {
