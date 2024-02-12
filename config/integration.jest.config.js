@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 export default {
   testEnvironment: 'node',
   roots: ['../__tests__/'],
-  testMatch: ['**/*.(int|integration).mjs'],
+  testMatch: ['**/*.(int|integration).js'],
   testTimeout: 60000 * 2, // 2 minutes timeout
 }
 

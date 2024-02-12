@@ -6,6 +6,7 @@ plugins:
   - serverless-iam-roles-per-function
   - serverless-export-env
   - serverless-plugin-scripts
+  - serverless-esbuild
 
 provider:
   name: aws
@@ -39,6 +40,11 @@ custom:
   scripts:
     hooks:
       'before:package:createDeploymentArtifacts': npm run build
+  esbuild:
+    format: esm
+    outputFileExtension: '.mjs'
+    banner:
+      js: "import { createRequire } from 'module';const require = createRequire(import.meta.url);"
 
 functions: ${file(iac/functions.yml)}
 

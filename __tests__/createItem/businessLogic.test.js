@@ -1,4 +1,4 @@
-import { performCalculation } from '../../src/createItem/businessLogic.mjs'
+import { performCalculation } from '../../src/createItem/businessLogic.js'
 
 describe('Creat Item buiness logic suite', () => {
   it('should add numbers', () => {

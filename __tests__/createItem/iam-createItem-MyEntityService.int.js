@@ -1,7 +1,7 @@
 import IamTestHelper from 'serverless-iam-test-helper';
 
-import { MyEntityService } from '../../src/common/services/MyEntityService.mjs'
-import { DynamoDbAdapter } from '../../src/common/adapters/DynamoDbAdapter.mjs';
+import { MyEntityService } from '../../src/common/services/MyEntityService.js'
+import { DynamoDbAdapter } from '../../src/common/adapters/DynamoDbAdapter.js';
 
 const cleanup = []
 

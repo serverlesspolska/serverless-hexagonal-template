@@ -1,4 +1,4 @@
-import { MyEntityService } from '../../../src/common/services/MyEntityService.mjs'
+import { MyEntityService } from '../../../src/common/services/MyEntityService.js'
 
 describe('MyEntity service', () => {
   it('should create and save new entity', async () => {

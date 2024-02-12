@@ -1,4 +1,4 @@
-import { DynamoDbAdapter } from '../../../src/common/adapters/DynamoDbAdapter.mjs'
+import { DynamoDbAdapter } from '../../../src/common/adapters/DynamoDbAdapter.js'
 
 describe('DynamoDB Adapter', () => {
   it('should query by field', async () => {

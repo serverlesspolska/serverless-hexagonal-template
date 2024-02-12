@@ -20,7 +20,7 @@ jspm_packages
 template.drawio.bak
 
 # schemas
-schema.*.mjs
+schema.*.js
 
 # build
 dist

@@ -1,7 +1,7 @@
 import { Logger } from '@aws-lambda-powertools/logger'
 
-import { DynamoDbAdapter } from '../adapters/DynamoDbAdapter.mjs';
-import { MyEntity } from '../entities/MyEntity.mjs'
+import { DynamoDbAdapter } from '../adapters/DynamoDbAdapter.js';
+import { MyEntity } from '../entities/MyEntity.js'
 
 const logger = new Logger()
 
