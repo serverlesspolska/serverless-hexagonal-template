@@ -15,7 +15,7 @@ const lambdaHandler = async (event) => {
   logger.info('Starting Lambda function')
   const result = performCalculation(event.body)
   const myEntityService = new MyEntityService()
-  return (await myEntityService.create(result)).toResponse()
+  return (await myEntityService.create(result)).toDto()
 }
 
 export const handler = middy()

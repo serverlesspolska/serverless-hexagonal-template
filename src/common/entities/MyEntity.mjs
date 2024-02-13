@@ -36,7 +36,7 @@ export class MyEntity {
     return KSUID.fromParts(createdAt.getTime(), payload).string
   }
 
-  toResponse() {
+  toDto() {
     return {
       id: this.id,
       result: this.result,
