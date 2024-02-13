@@ -6,7 +6,8 @@ import { Logger } from '@aws-lambda-powertools/logger'
 
 import { performCalculation } from './businessLogic.mjs'
 import { MyEntityService } from '../common/services/MyEntityService.mjs'
-import eventSchema from './schema.inputSchema.mjs'
+import eventSchema from './schema.eventSchema.mjs'
+import responseSchema from './schema.responseSchema.mjs'
 
 const logger = new Logger()
 
@@ -14,11 +15,11 @@ const lambdaHandler = async (event) => {
   logger.info('Starting Lambda function')
   const result = performCalculation(event.body)
   const myEntityService = new MyEntityService()
-  return myEntityService.create(result)
+  return (await myEntityService.create(result)).toResponse()
 }
 
 export const handler = middy()
   .use(jsonBodyParser())
-  .use(validator({ eventSchema })) // TODO implement responseSchema as well (best practice)
+  .use(validator({ eventSchema, responseSchema }))
   .use(httpErrorHandler({ logger: (...args) => logger.error(args) }))
   .handler(lambdaHandler)

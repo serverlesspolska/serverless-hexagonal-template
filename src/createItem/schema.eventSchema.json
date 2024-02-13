@@ -1,5 +1,5 @@
 {
-    "title": "Input Schema",
+    "title": "Event Schema",
     "type": "object",
     "properties": {
       "body": {
