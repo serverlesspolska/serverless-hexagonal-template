@@ -148,7 +148,7 @@ In order to remove that obstacle, I decided to implement a simple solution that 
 
 When executing the `serverless` or `sls` command without the` -s` (stage) parameter, your `username` will be used to name the stage. 
 
-> For example, my user name on my laptop is `pawel` therefore, the stage will be named `serverless-hexagonal-template-dev-pawel`. All settings such as `profile` and `region` will be inherited from the dev configuration.
+> For example, my user name on my laptop is `pawel` therefore, the stage will be named `serverless-hexagonal-template-dev-pawel`. Settings such as deployment `region` will be inherited from the dev configuration.
 
 In that way, your colleagues can deploy their own stages (development environments) in the same region on the same AWS account without any conflicts (given that their usernames are unique in the scope of your project).
 
@@ -168,6 +168,40 @@ sls deploy -s <stage> # stage = dev | test | prod
 ```
 
 The stages configuration is defined in `config/deployment.yml` file.
+
+### Deployment credentials
+
+#### Important Information Regarding profile Usage
+Changes to AWS CLI `profile` configuration
+In the previous version of our template, the AWS CLI `profile` was specified in the Serverless Framework configuration file (`config/deployment.yml`) and utilized during the deployment process. This approach has been phased out due to complications it introduced in CI/CD configurations.
+
+The template now adheres to the standard AWS and Serverless Framework credentials resolution method as outlined in the [AWS documentation](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html).
+
+#### Credentials Resolution Order
+The system will attempt to resolve your credentials in the following order:
+1. Environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are checked first.
+1. If not found, the `default` AWS `profile` is used.
+1. Other / custom method.
+
+#### Utilizing `direnv` tool for custom profile configuration
+For those requiring a different `profile` than the `default`, it is recommended to use the `direnv` tool. This allows you to specify an AWS profile for your project within the `.envrc` file located at the root directory, overriding system settings. Ensure that the AWS profile is already defined in your `~/.aws/credentials` file.
+
+To set up `direnv`, follow these steps:
+
+1. Define your AWS profile in the `.envrc` file to automatically use it within the project's directory and its subdirectories.
+```Bash
+# Set a default profile for this directory
+export AWS_PROFILE=my-dev-profile
+```
+2. Alternatively, you can directly set your access keys:
+```Bash
+# Set AWS access keys directly
+export AWS_ACCESS_KEY_ID=<access_key_value>
+export AWS_SECRET_ACCESS_KEY=<secret_access_key_value>
+```
+**Note**: These credentials are utilized not only during the deployment process but also for integration and end-to-end testing.
+
+For more information on direnv and its setup, visit https://direnv.net.
 
 # What's included?
 
