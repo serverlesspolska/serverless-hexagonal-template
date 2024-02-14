@@ -35,4 +35,12 @@ export class MyEntity {
     const payload = randomBytes(16)
     return KSUID.fromParts(createdAt.getTime(), payload).string
   }
+
+  toDto() {
+    return {
+      id: this.id,
+      result: this.result,
+      createdAt: this.createdAt.toISOString()
+    }
+  }
 }
