@@ -171,9 +171,8 @@ The stages configuration is defined in `config/deployment.yml` file.
 
 ### Deployment credentials
 
-#### Important Information Regarding profile Usage
-Changes to AWS CLI `profile` configuration
-In the previous version of our template, the AWS CLI `profile` was specified in the Serverless Framework configuration file (`config/deployment.yml`) and utilized during the deployment process. This approach has been phased out due to complications it introduced in CI/CD configurations.
+#### Changes to AWS CLI `profile` configuration
+In the previous version of this template, the AWS CLI `profile` was specified in the Serverless Framework configuration file (`config/deployment.yml`) and utilized during the deployment process. This approach has been phased out due to complications it introduced in CI/CD configurations.
 
 The template now adheres to the standard AWS and Serverless Framework credentials resolution method as outlined in the [AWS documentation](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html).
 
@@ -183,8 +182,8 @@ The system will attempt to resolve your credentials in the following order:
 1. If not found, the `default` AWS `profile` is used.
 1. Other / custom method.
 
-#### Utilizing `direnv` tool for custom profile configuration
-For those requiring a different `profile` than the `default`, it is recommended to use the `direnv` tool. This allows you to specify an AWS profile for your project within the `.envrc` file located at the root directory, overriding system settings. Ensure that the AWS profile is already defined in your `~/.aws/credentials` file.
+#### Custom profile configuration
+For those requiring a different `profile` than the `default`, it is recommended to use the `direnv` tool. This allows you to specify an AWS profile for your project within the `.envrc` file located at the project root directory, overriding system settings. Ensure that the AWS profile is already defined in your `~/.aws/credentials` file or `~/.aws/config` if you use SSO.
 
 To set up `direnv`, follow these steps:
 
