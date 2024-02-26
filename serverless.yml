@@ -13,6 +13,7 @@ provider:
   runtime: nodejs20.x
   region: ${opt:region, self:custom.deployment.region.${self:custom.globalStage}}
   logRetentionInDays: 60 # how long logs are kept in CloudWatch
+  deploymentMethod: direct
   environment:
     # required Environment Variables. Don't remove.
     stage: ${self:provider.stage}
