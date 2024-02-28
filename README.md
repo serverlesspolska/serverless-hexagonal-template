@@ -7,19 +7,25 @@
 
 Highly opinionated project template for [Serverless Framework](https://www.serverless.com/) that applies **hexagonal architecture** principles to the serverless world. Crafted with easy testing in mind.
 
-# Updated to Serverless Framework V3
+# Spring 2024 - big modernization
 
-This template has been updated and uses Serverless Framework V3. You can access most recent version of V2 compatible setup [here](https://github.com/serverlesspolska/serverless-hexagonal-template/releases/tag/ServerlessFrameworkV2). Significant changes:
+At the beginning of 2024 this project has been refurbished. 
 
-* Switched to Serverless Framework V3 (tested with `3.19.0`)
-* Updated all dependencies to newest versions
-* Added **feature allowing developers to work in parallel on isolated stages (environments)**. [More info here](#deployment)
+Here's a snapshot of significant updates that have been done:
+* 𝘿𝙚𝙥𝙚𝙣𝙙𝙚𝙣𝙘𝙮 𝙖𝙣𝙙 𝙍𝙪𝙣𝙩𝙞𝙢𝙚 𝙐𝙥𝙜𝙧𝙖𝙙𝙚: We've successfully transitioned from Node 16 to Node 20, ensuring our project stays at the cutting edge of technology.
+* 𝙀𝙢𝙗𝙧𝙖𝙘𝙞𝙣𝙜 𝙈𝙤𝙙𝙚𝙧𝙣 𝙅𝙖𝙫𝙖𝙎𝙘𝙧𝙞𝙥𝙩: By shifting from require statements to import, our code now fully leverages Node modules, streamlining our development process.
+* 𝘼𝙒𝙎 𝙎𝘿𝙆 𝙀𝙫𝙤𝙡𝙪𝙩𝙞𝙤𝙣: Our migration from AWS SDK v2 to v3 marks a significant leap forward in efficiency and performance.
+* 𝙈𝙞𝙙𝙙𝙡𝙚𝙬𝙖𝙧𝙚 𝙖𝙣𝙙 𝙏𝙚𝙨𝙩𝙞𝙣𝙜 𝙀𝙣𝙝𝙖𝙣𝙘𝙚𝙢𝙚𝙣𝙩𝙨: Updates to Middy v5 middleware and aws-testing-library have fortified our project, eliminating deprecated dependencies and vulnerabilities.
+* 𝙊𝙥𝙩𝙞𝙢𝙞𝙯𝙞𝙣𝙜 𝘼𝙋𝙄 𝘾𝙖𝙡𝙡𝙨: Replacing Axios with native fetch has optimized our API interactions and reduced our project's complexity.
+* 𝙎𝙩𝙧𝙪𝙘𝙩𝙪𝙧𝙚𝙙 𝙇𝙤𝙜𝙜𝙞𝙣𝙜 𝙬𝙞𝙩𝙝 𝙋𝙤𝙬𝙚𝙧𝙏𝙤𝙤𝙡𝙨: The introduction of the PowerTools logger has transformed our logging process, enabling more effective tracking and analysis.
+* 𝙀𝙣𝙝𝙖𝙣𝙘𝙚𝙙 𝙋𝙚𝙧𝙛𝙤𝙧𝙢𝙖𝙣𝙘𝙚 with AJV Pre-compilation: By introducing AJV pre-compilation of schemas for Middy Validator, we've dramatically 𝗿𝗲𝗱𝘂𝗰𝗲𝗱 𝗼𝘂𝗿 𝗹𝗮𝗺𝗯𝗱𝗮 𝗽𝗮𝗰𝗸𝗮𝗴𝗲 𝘀𝗶𝘇𝗲 𝗳𝗿𝗼𝗺 𝟭.𝟳𝗠𝗕 𝘁𝗼 𝟰𝟳𝟴𝗞𝗕 (𝟳𝟮%). This significant reduction lowers cold start times and boosts overall performance.
+* 𝙎𝙞𝙢𝙥𝙡𝙞𝙛𝙞𝙘𝙖𝙩𝙞𝙤𝙣 𝙤𝙛 𝙘𝙧𝙚𝙙𝙚𝙣𝙩𝙞𝙖𝙡 𝙢𝙖𝙣𝙖𝙜𝙚𝙢𝙚𝙣𝙩: AWS CLI profile was removed from the configuration file due to complications it introduced in CI/CD configurations.
 
 # Quick start
 
 This is a *template* from which you can create your own project by executing following command:
 ```
-sls create --template-url https://github.com/serverlesspolska/serverless-hexagonal-template --name your-project-name
+sls create --template-url https://github.com/serverlesspolska/serverless-hexagonal-template/tree/main --name your-project-name
 ```
 
 Next install dependencies:
