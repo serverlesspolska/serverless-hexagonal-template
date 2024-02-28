@@ -7,7 +7,7 @@
 
 Highly opinionated project template for [Serverless Framework](https://www.serverless.com/) that applies **hexagonal architecture** principles to the serverless world. Crafted with easy testing in mind.
 
-# Spring 2024 - big modernization
+# Recent modernization
 
 At the beginning of 2024 this project has been refurbished. 
 
