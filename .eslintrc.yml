@@ -9,7 +9,7 @@ globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
 parserOptions:
-  ecmaVersion: 2018
+  ecmaVersion: 2024
 rules:
   semi: off
   line-break-style: off
@@ -19,3 +19,4 @@ rules:
   comma-dangle: off
   no-console: off
   import/no-extraneous-dependencies: off
+  import/extensions: off

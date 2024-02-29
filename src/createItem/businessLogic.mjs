@@ -1,7 +1,15 @@
-const log = require('serverless-logger')(__filename)
+import { Logger } from '@aws-lambda-powertools/logger'
 
-const performCalculation = ({ a, b, method }) => {
-  log(`Received method="${method}" and values: a=${a}; b=${b}`)
+const logger = new Logger()
+
+export const performCalculation = ({ a, b, method }) => {
+  logger.info('Received method with values', {
+    method,
+    values: {
+      a,
+      b,
+    }
+  })
   switch (method) {
     case 'add':
       return a + b
@@ -20,5 +28,3 @@ class NotImplementedYetError extends Error {
     this.message = 'Not implemented yet!'
   }
 }
-
-module.exports = { performCalculation }

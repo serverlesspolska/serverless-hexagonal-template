@@ -1,7 +1,7 @@
-const crypto = require('crypto')
-const KSUID = require('ksuid')
+import { randomBytes } from 'node:crypto';
+import KSUID from 'ksuid';
 
-module.exports = class MyEntity {
+export class MyEntity {
   constructor({ id, result, createdAt = new Date() }) {
     this.createdAt = createdAt instanceof Date ? createdAt : new Date(createdAt)
     this.result = parseInt(result, 10)
@@ -32,7 +32,15 @@ module.exports = class MyEntity {
 
   // eslint-disable-next-line class-methods-use-this
   generateId(createdAt) {
-    const payload = crypto.randomBytes(16)
+    const payload = randomBytes(16)
     return KSUID.fromParts(createdAt.getTime(), payload).string
+  }
+
+  toDto() {
+    return {
+      id: this.id,
+      result: this.result,
+      createdAt: this.createdAt.toISOString()
+    }
   }
 }

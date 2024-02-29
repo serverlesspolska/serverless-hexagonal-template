@@ -1,23 +1,25 @@
 service: serverless-hexagonal-template
 
-frameworkVersion: '>=3.19.0'
+frameworkVersion: '^3'
 
 plugins:
   - serverless-iam-roles-per-function
   - serverless-export-env
+  - serverless-plugin-scripts
 
 provider:
   name: aws
-  stage: ${opt:stage, file(./config/stage.js):userStage}
-  runtime: nodejs16.x
-  profile: ${self:custom.deployment.profile.${self:custom.globalStage}}
-  region: ${self:custom.deployment.region.${self:custom.globalStage}}
+  stage: ${opt:stage, file(./config/stage.cjs):userStage}
+  runtime: nodejs20.x
+  region: ${opt:region, self:custom.deployment.region.${self:custom.globalStage}}
   logRetentionInDays: 60 # how long logs are kept in CloudWatch
+  deploymentMethod: direct
   environment:
     # required Environment Variables. Don't remove.
     stage: ${self:provider.stage}
     region: ${self:provider.region}
     service: ${self:service}
+    POWERTOOLS_SERVICE_NAME: ${self:service}
     # your variables - optional
     httpApiGatewayEndpointId: !Ref HttpApi
   tags:
@@ -34,81 +36,23 @@ custom:
   export-env: # serverless-export-env config
     filename: .awsenv # custom filename to avoid conflict with Serverless Framework '.env' auto loading feature
     overwrite: true
+  scripts:
+    hooks:
+      'before:package:createDeploymentArtifacts': npm run build
 
-functions:
-  createItem:
-    handler: src/createItem/function.handler
-    description: Create Item in repository
-    memorySize: 128
-    timeout: 5
-    environment:
-      tableName: ${self:custom.tableName}
-    events:
-      - httpApi:
-          method: POST
-          path: /item
-    iamRoleStatements:
-      - Sid: DynamoDBReadWrite
-        Effect: Allow
-        Action:
-          - dynamodb:PutItem
-          - dynamodb:UpdateItem
-        Resource: 
-          - !GetAtt Table.Arn
-
-  processItem:
-    handler: src/processItem/function.handler
-    description: Triggered by DynamoDB Streams. Does some work on newly created Item
-    memorySize: 128
-    timeout: 5
-    environment:
-      message: Hello World!
-    events:
-      - stream:
-          type: dynamodb
-          arn: !GetAtt Table.StreamArn
-          maximumRetryAttempts: 1
-          batchSize: 1
-    iamRoleStatements:
-      - Sid: DynamoDBRead
-        Effect: Allow
-        Action:
-          - dynamodb:GetItem
-        Resource: 
-          - !GetAtt Table.Arn
+functions: ${file(iac/functions.yml)}
 
 package:
   patterns:
-    # include
-    - src/**
     # exclude
-    - '!*'
     - '!__tests__/**'
     - '!documentation/**'
     - '!config/**'
+    - '!iac/**'
+    - '!src/**/schema.*.json'
+    - '!*'
 
 resources:
-  Description: ${self:custom.description}
-
-  Resources:
-
-    Table:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: PK
-            AttributeType: S
-        KeySchema:
-          - AttributeName: PK
-            KeyType: HASH
-        BillingMode: PAY_PER_REQUEST
-        TableName: ${self:custom.tableName}
-        Tags:
-          - Key: Application
-            Value: ${self:service}
-          - Key: Stage
-            Value: ${self:provider.stage}
-          - Key: StackName
-            Value: !Ref AWS::StackId
-        StreamSpecification:
-          StreamViewType: NEW_IMAGE
+  - Description: ${self:custom.description}
+  # define each resource in a separate file per service in `iac` folder
+  - ${file(iac/dynamodb.yml)}

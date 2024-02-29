@@ -1,8 +1,4 @@
 deployment:
-  profile: # references you profiles set in ~/.aws/credentials
-    dev: default
-    test: default
-    prod: default
   region:
     dev: eu-central-1   # Frankfurt
     test: eu-west-1     # Ireland

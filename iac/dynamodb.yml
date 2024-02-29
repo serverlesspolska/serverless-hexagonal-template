@@ -1,0 +1,21 @@
+Resources:
+  Table:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: PK
+          AttributeType: S
+      KeySchema:
+        - AttributeName: PK
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+      TableName: ${self:custom.tableName}
+      Tags:
+        - Key: Application
+          Value: ${self:service}
+        - Key: Stage
+          Value: ${self:provider.stage}
+        - Key: StackName
+          Value: !Ref AWS::StackId
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE

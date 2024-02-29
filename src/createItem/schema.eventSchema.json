@@ -1,0 +1,29 @@
+{
+    "title": "Event Schema",
+    "type": "object",
+    "properties": {
+      "body": {
+        "type": "object",
+        "properties": {
+          "a": {
+            "type": "number"
+          },
+          "b": {
+            "type": "number"
+          },
+          "method": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "a",
+          "b",
+          "method"
+        ]
+      }
+    },
+    "required": [
+      "body"
+    ]
+  }
+  

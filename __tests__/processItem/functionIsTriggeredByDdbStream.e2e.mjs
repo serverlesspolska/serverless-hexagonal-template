@@ -1,6 +1,4 @@
-const { default: axios } = require('axios')
-
-axios.defaults.baseURL = `https://${process.env.httpApiGatewayEndpointId}.execute-api.${process.env.region}.amazonaws.com`
+const baseURL = `https://${process.env.httpApiGatewayEndpointId}.execute-api.${process.env.region}.amazonaws.com`
 
 describe('processItem Lambda function', () => {
   it('should be invoked by DDB Stream after createItem Lambda saves element into DynamoDB', async () => {
@@ -12,11 +10,18 @@ describe('processItem Lambda function', () => {
     }
 
     // WHEN
-    const actual = await axios.post('/item', payload)
-    const newItemDbId = actual.data.id
+    const response = await fetch(`${baseURL}/item`, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+    const actual = await response.json()
+    const newItemDbId = actual.id
 
     // THEN
-    expect(actual.status).toBe(200)
+    expect(response.status).toBe(200)
 
     // Using aws-testing-library lib that extends jest framework
     await expect({

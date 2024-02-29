@@ -1,6 +1,4 @@
-const log = require('serverless-logger')(__filename)
-
-const businessLogic = require('../../src/createItem/businessLogic')
+import { performCalculation } from '../../src/createItem/businessLogic.mjs'
 
 describe('Creat Item buiness logic suite', () => {
   it('should add numbers', () => {
@@ -10,7 +8,7 @@ describe('Creat Item buiness logic suite', () => {
     const method = 'add'
 
     // WHEN
-    const actual = businessLogic.performCalculation({ a, b, method })
+    const actual = performCalculation({ a, b, method })
 
     // THEN
     expect(actual).toBe(7)
@@ -25,7 +23,7 @@ describe('Creat Item buiness logic suite', () => {
     // WHEN
     let error
     try {
-      businessLogic.performCalculation({ a, b, method })
+      performCalculation({ a, b, method })
     } catch (e) {
       error = e
     }

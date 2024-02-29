@@ -1,0 +1,40 @@
+createItem:
+  handler: src/createItem/function.handler
+  description: Create Item in repository
+  memorySize: 128
+  timeout: 5
+  environment:
+    tableName: ${self:custom.tableName}
+  events:
+    - httpApi:
+        method: POST
+        path: /item
+  iamRoleStatements:
+    - Sid: DynamoDBReadWrite
+      Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+      Resource: 
+        - !GetAtt Table.Arn
+
+processItem:
+  handler: src/processItem/function.handler
+  description: Triggered by DynamoDB Streams. Does some work on newly created Item
+  memorySize: 128
+  timeout: 5
+  environment:
+    message: Hello World!
+  events:
+    - stream:
+        type: dynamodb
+        arn: !GetAtt Table.StreamArn
+        maximumRetryAttempts: 1
+        batchSize: 1
+  iamRoleStatements:
+    - Sid: DynamoDBRead
+      Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource: 
+        - !GetAtt Table.Arn

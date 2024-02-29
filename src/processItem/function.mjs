@@ -1,12 +1,14 @@
-const log = require('serverless-logger')(__filename)
+import { Logger } from '@aws-lambda-powertools/logger'
 
-const handler = async (event) => {
+const logger = new Logger()
+
+export const handler = async (event) => {
   const item = parseEvent(event)
-  log('item', JSON.stringify(item))
+  logger.info('Received item to process', { item })
 
   // this log message is used for testing
   // don't remove it. See: functionIsTriggeredByDdbStream.e2e.js
-  log(`Processing item ${item.dynamodb.Keys.PK.S}`)
+  logger.info(`Processing item ${item.dynamodb.Keys.PK.S}`)
 
   // here you can implement rest of your Lambda code
 
@@ -14,5 +16,3 @@ const handler = async (event) => {
 }
 
 const parseEvent = (event) => event.Records[0]
-
-module.exports.handler = handler

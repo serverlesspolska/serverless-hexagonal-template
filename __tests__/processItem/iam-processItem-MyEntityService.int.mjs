@@ -1,12 +1,15 @@
-const log = require('serverless-logger')(__filename)
-const IamTestHelper = require('serverless-iam-test-helper')
+import IamTestHelper from 'serverless-iam-test-helper';
 
-const MyEntityService = require('../../src/common/services/MyEntityService')
+import { MyEntityService } from '../../src/common/services/MyEntityService.mjs';
 
 describe('ProcessItem Lambda IAM Role', () => {
   beforeAll(async () => {
     await IamTestHelper.assumeRoleByLambdaName('processItem')
   });
+
+  afterAll(() => {
+    IamTestHelper.leaveLambdaRole()
+  })
 
   it('should ALLOW dynamodb:GetItem', async () => {
     // GIVEN
@@ -26,33 +29,32 @@ describe('ProcessItem Lambda IAM Role', () => {
     const service = new MyEntityService()
 
     // WHEN
-    let actual
+    let exception
     try {
       await service.create(result)
-    } catch (exception) {
-      actual = exception
+    } catch (error) {
+      exception = error
     }
 
     // THEN
-    expect(actual.code).toBe('AccessDeniedException')
-    expect(actual.message.includes('is not authorized to perform: dynamodb:PutItem')).toBeTruthy()
+    expect(exception.name).toBe('AccessDeniedException')
+    expect(exception.message.includes('is not authorized to perform: dynamodb:PutItem')).toBeTruthy()
   })
-
   it('should DENY dynamodb:Query', async () => {
     // GIVEN
     const result = 48
     const service = new MyEntityService()
 
     // WHEN
-    let actual
+    let exception
     try {
       await service.getByResult(result)
-    } catch (exception) {
-      actual = exception
+    } catch (error) {
+      exception = error
     }
 
     // THEN
-    expect(actual.code).toBe('AccessDeniedException')
-    expect(actual.message.includes('is not authorized to perform: dynamodb:Query')).toBeTruthy()
+    expect(exception.name).toBe('AccessDeniedException')
+    expect(exception.message.includes('is not authorized to perform: dynamodb:Query')).toBeTruthy()
   })
 })
