@@ -67,7 +67,7 @@ export class DynamoDbAdapter {
       logger.info('Item saved successfully')
       return entity
     } catch (error) {
-      logger.info('Error', error)
+      logger.error('Item not saved', error)
       throw error
     }
   }
