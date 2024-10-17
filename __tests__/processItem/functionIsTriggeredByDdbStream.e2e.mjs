@@ -11,11 +11,11 @@ describe('processItem Lambda function', () => {
 
     // WHEN
     const response = await fetch(`${baseURL}/item`, {
-        method: 'POST',
-        body: JSON.stringify(payload),
-        headers: {
-            "Content-Type": "application/json",
-        }
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+      }
     })
     const actual = await response.json()
     const newItemDbId = actual.id
@@ -29,10 +29,10 @@ describe('processItem Lambda function', () => {
       function: `${process.env.service}-${process.env.stage}-processItem`,
       timeout: 25 * 1000
     }).toHaveLog(
-      /* a log message in the processItem Lambda function
-         with id of newly crated item profs that functions
-         was invoked, and DynamoDB Stream integration is
-         properly configured
+      /*
+        A log message in the processItem Lambda function containing the ID
+        of the newly created item confirms that the function was successfully
+        invoked and that the DynamoDB Stream integration is correctly configured.
       */
       `Processing item ${newItemDbId}`
     );
