@@ -34,6 +34,13 @@ describe('CreateItem Lambda IAM Role', () => {
 
     // THEN
     expect(actual).toBeTruthy()
+    expect(actual.result).toBe(result)
+    expect(actual.id.length).toBeGreaterThan(10)
+
+    // expect actual.createdAt to be less than 1 minute old
+    const now = new Date()
+    const createdAt = new Date(actual.createdAt)
+    expect(now.getTime() - createdAt.getTime()).toBeLessThan(60 * 1000)
 
     // CLEANUP
     cleanup.push(actual) // afterAll method above
