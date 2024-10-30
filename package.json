@@ -18,10 +18,10 @@
     "build": "npm i && ./build.sh"
   },
   "devDependencies": {
-    "@aws-sdk/client-dynamodb": "^3.670.0",
-    "@aws-sdk/lib-dynamodb": "^3.670.0",
+    "@aws-sdk/client-dynamodb": "^3.682.0",
+    "@aws-sdk/lib-dynamodb": "^3.682.0",
     "@types/jest": "^29.5.13",
-    "ajv-cmd": "^0.7.9",
+    "ajv-cmd": "^0.7.10",
     "aws-testing-library": "gerwant/aws-testing-library#modernization",
     "dotenv": "^16.4.5",
     "eslint": "^8.55.0",
@@ -35,7 +35,7 @@
     "serverless-plugin-scripts": "^1.0.2"
   },
   "dependencies": {
-    "@aws-lambda-powertools/logger": "^2.9.0",
+    "@aws-lambda-powertools/logger": "^2.10.0",
     "@middy/core": "^5.5.1",
     "@middy/http-error-handler": "^5.5.1",
     "@middy/http-json-body-parser": "^5.5.1",
