@@ -3,7 +3,7 @@ import { Logger } from '@aws-lambda-powertools/logger'
 import { DynamoDbAdapter } from '../adapters/DynamoDbAdapter.mjs';
 import { MyEntity } from '../entities/MyEntity.mjs'
 
-const logger = new Logger()
+const logger = new Logger({ serviceName: import.meta.url.split('/').pop() });
 
 export class MyEntityService {
   constructor(dynamoDbAdapter) {

@@ -9,7 +9,7 @@ import { MyEntityService } from '../common/services/MyEntityService.mjs'
 import eventSchema from './schema.eventSchema.mjs'
 import responseSchema from './schema.responseSchema.mjs'
 
-const logger = new Logger()
+const logger = new Logger({ serviceName: import.meta.url.split('/').pop() });
 
 const lambdaHandler = async (event) => {
   logger.info('Starting Lambda function')

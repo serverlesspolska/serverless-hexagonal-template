@@ -1,6 +1,6 @@
 import { Logger } from '@aws-lambda-powertools/logger'
 
-const logger = new Logger()
+const logger = new Logger({ serviceName: import.meta.url.split('/').pop() });
 
 export const handler = async (event) => {
   const item = parseEvent(event)
