@@ -29,6 +29,7 @@
     "eslint-plugin-import": "^2.26.0",
     "jest": "^29.7.0",
     "serverless": "^3.39.0",
+    "serverless-better-credentials": "^2.0.0",
     "serverless-export-env": "^2.2.0",
     "serverless-iam-roles-per-function": "^3.2.0",
     "serverless-iam-test-helper": "^1.0.1",

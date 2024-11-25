@@ -3,6 +3,7 @@ service: serverless-hexagonal-template
 frameworkVersion: '^3'
 
 plugins:
+  - serverless-better-credentials
   - serverless-iam-roles-per-function
   - serverless-export-env
   - serverless-plugin-scripts
