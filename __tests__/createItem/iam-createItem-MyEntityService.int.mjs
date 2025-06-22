@@ -1,29 +1,10 @@
 import IamTestHelper from 'serverless-iam-test-helper';
-
 import { MyEntityService } from '../../src/common/services/MyEntityService.mjs'
 import { DynamoDbAdapter } from '../../src/common/adapters/DynamoDbAdapter.mjs';
 
 const cleanup = []
 
-describe('CreateItem Lambda IAM Role', () => {
-  beforeAll(async () => {
-    await IamTestHelper.assumeRoleByLambdaName('createItem')
-  });
-
-  // this a compensation method, that deletes from database all items created by the test
-  // since createItem lambda IAM role does not have privileges to remove item from DynamoDB
-  // IamTestHelper.leaveLambdaRole() is executed to switch back to user's (your) IAM privileges
-  afterAll(async () => {
-    IamTestHelper.leaveLambdaRole()
-
-    const userRoleAdapter = new DynamoDbAdapter()
-    const deleteAll = cleanup.map((obj) => userRoleAdapter.delete({
-      Key: obj.key(),
-      TableName: process.env.tableName
-    }))
-    await Promise.all(deleteAll)
-  });
-
+IamTestHelper.describeWithRole('CreateItem Lambda IAM Role', 'createItem', () => {
   it('should ALLOW dynamodb:PutItem', async () => {
     // GIVEN
     const result = 48
@@ -43,7 +24,7 @@ describe('CreateItem Lambda IAM Role', () => {
     expect(now.getTime() - createdAt.getTime()).toBeLessThan(60 * 1000)
 
     // CLEANUP
-    cleanup.push(actual) // afterAll method above
+    cleanup.push(actual) // will be automatically cleaned up
   })
 
   it('should DENY dynamodb:GetItem', async () => {
@@ -80,4 +61,18 @@ describe('CreateItem Lambda IAM Role', () => {
     expect(exception.name).toBe('AccessDeniedException')
     expect(exception.message.includes('is not authorized to perform: dynamodb:Query')).toBeTruthy()
   })
+}, {
+  // Optional cleanup function - automatically called after credentials are restored
+  cleanup: async () => {
+    if (cleanup.length > 0) {
+      console.log(`(Doing cleanup after test. Removing ${cleanup.length} items from DynamoDB) `)
+      const userRoleAdapter = new DynamoDbAdapter()
+      const deleteAll = cleanup.map((obj) => userRoleAdapter.delete({
+        Key: obj.key(),
+        TableName: process.env.tableName
+      }))
+      await Promise.all(deleteAll)
+      cleanup.length = 0 // Clear the cleanup array
+    }
+  }
 })

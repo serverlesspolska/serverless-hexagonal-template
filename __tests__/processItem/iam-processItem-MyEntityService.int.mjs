@@ -1,16 +1,7 @@
 import IamTestHelper from 'serverless-iam-test-helper';
-
 import { MyEntityService } from '../../src/common/services/MyEntityService.mjs';
 
-describe('ProcessItem Lambda IAM Role', () => {
-  beforeAll(async () => {
-    await IamTestHelper.assumeRoleByLambdaName('processItem')
-  });
-
-  afterAll(() => {
-    IamTestHelper.leaveLambdaRole()
-  })
-
+IamTestHelper.describeWithRole('ProcessItem Lambda IAM Role', 'processItem', () => {
   it('should ALLOW dynamodb:GetItem', async () => {
     // GIVEN
     const service = new MyEntityService()
