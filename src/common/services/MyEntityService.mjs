@@ -37,7 +37,7 @@ export class MyEntityService {
 
   async getByResult(value) {
     const response = await this.dynamoDbAdapter.queryByField(this.tableName, 'result', value)
-    // eslint-disable-next-line max-len
+
     return response.Items.map((item) => new MyEntity({ id: item.PK, result: item.result, createdAt: item.createdAt }))
   }
 }

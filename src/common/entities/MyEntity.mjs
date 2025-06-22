@@ -30,7 +30,6 @@ export class MyEntity {
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
   generateId(createdAt) {
     const payload = randomBytes(16)
     return KSUID.fromParts(createdAt.getTime(), payload).string
