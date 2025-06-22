@@ -18,29 +18,31 @@
     "build": "npm i && ./build.sh"
   },
   "devDependencies": {
-    "@aws-sdk/client-dynamodb": "^3.699.0",
-    "@aws-sdk/lib-dynamodb": "^3.699.0",
-    "@types/jest": "^29.5.13",
-    "ajv-cmd": "^0.7.11",
+    "@aws-sdk/client-dynamodb": "3.830.0",
+    "@aws-sdk/lib-dynamodb": "3.830.0",
+    "@types/jest": "30.0.0",
+    "ajv": "7.2.4",
+    "ajv-cmd": "0.7.12",
+    "ajv-formats": "2.1.1",
     "aws-testing-library": "gerwant/aws-testing-library#modernization",
-    "dotenv": "^16.4.5",
-    "eslint": "^8.55.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "jest": "^29.7.0",
-    "serverless": "^3.40.0",
-    "serverless-better-credentials": "^2.0.0",
-    "serverless-export-env": "^2.2.0",
-    "serverless-iam-roles-per-function": "^3.2.0",
-    "serverless-iam-test-helper": "^1.1.0",
-    "serverless-plugin-scripts": "^1.0.2"
+    "dotenv": "16.5.0",
+    "eslint": "8.57.1",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.32.0",
+    "jest": "29.7.0",
+    "serverless": "3.40.0",
+    "serverless-better-credentials": "2.0.1",
+    "serverless-export-env": "2.2.0",
+    "serverless-iam-roles-per-function": "3.2.0",
+    "serverless-iam-test-helper": "1.1.0",
+    "serverless-plugin-scripts": "1.0.2"
   },
   "dependencies": {
-    "@aws-lambda-powertools/logger": "^2.11.0",
-    "@middy/core": "^5.5.1",
-    "@middy/http-error-handler": "^5.5.1",
-    "@middy/http-json-body-parser": "^5.5.1",
-    "ksuid": "^3.0.0",
-    "middy-ajv": "^3.0.0"
+    "@aws-lambda-powertools/logger": "2.22.0",
+    "@middy/core": "5.5.1",
+    "@middy/http-error-handler": "5.5.1",
+    "@middy/http-json-body-parser": "5.5.1",
+    "ksuid": "3.0.0",
+    "middy-ajv": "3.0.0"
   }
 }
