@@ -9,9 +9,18 @@ Highly opinionated project template for [Serverless Framework](https://www.serve
 
 # Recent modernization
 
-At the beginning of 2024 this project has been refurbished. 
+In 2025 the project received additional modernization updates:
+* 𝙉𝙤𝙙𝙚.𝙟𝙨 𝙍𝙪𝙣𝙩𝙞𝙢𝙚 𝙐𝙥𝙜𝙧𝙖𝙙𝙚: Upgraded from Node.js 20.x to 22.x in serverless configuration for enhanced performance and latest features.
+* 𝘿𝙚𝙥𝙡𝙤𝙮𝙢𝙚𝙣𝙩 𝙏𝙤𝙤𝙡 𝙈𝙞𝙜𝙧𝙖𝙩𝙞𝙤𝙣: Transitioned from serverless to [oss-serverless](https://github.com/oss-serverless/serverless) for support of Node.js 22 runtime.
+* 𝙀𝙎𝙇𝙞𝙣𝙩 𝙈𝙤𝙙𝙚𝙧𝙣𝙞𝙯𝙖𝙩𝙞𝙤𝙣: Migrated to ESLint 9 with neostandard configuration, removing legacy config files and updating dependencies.
+* 𝙏𝙚𝙨𝙩𝙞𝙣𝙜 𝙁𝙧𝙖𝙢𝙚𝙬𝙤𝙧𝙠 𝙐𝙥𝙙𝙖𝙩𝙚: Updated Jest to version 30.0.2 for better testing capabilities.
+* 𝙎𝙘𝙝𝙚𝙢𝙖 𝙑𝙖𝙡𝙞𝙙𝙖𝙩𝙞𝙤𝙣 𝙊𝙥𝙩𝙞𝙢𝙞𝙯𝙖𝙩𝙞𝙤𝙣: Standardized AJV command options and improved package dependencies for better compatibility.
+* 𝙏𝙚𝙨𝙩𝙞𝙣𝙜 𝙞𝙢𝙥𝙧𝙤𝙫𝙚𝙢𝙚𝙣𝙩𝙨: Updated [serverless-iam-test-helper
+](https://github.com/serverlesspolska/serverless-iam-test-helper) testing library with better support for SSO profiles, and enhanced testing methods such `describeWithRole()`.
+* 𝙉𝙚𝙬 𝘼𝙪𝙩𝙝𝙚𝙣𝙩𝙞𝙘𝙖𝙩𝙞𝙤𝙣 𝙎𝙪𝙥𝙥𝙤𝙧𝙩: Added serverless-better-credentials to handle AWS SSO profiles seamlessly.
+* 𝙀𝙣𝙝𝙖𝙣𝙘𝙚𝙙 𝙇𝙤𝙜𝙜𝙞𝙣𝙜: Improved logging system to include filename information for better debugging experience.
 
-Here's a snapshot of significant updates that have been done:
+At the beginning of 2024 this project has been refurbished. Here's a snapshot of significant updates that have been done:
 * 𝘿𝙚𝙥𝙚𝙣𝙙𝙚𝙣𝙘𝙮 𝙖𝙣𝙙 𝙍𝙪𝙣𝙩𝙞𝙢𝙚 𝙐𝙥𝙜𝙧𝙖𝙙𝙚: We've successfully transitioned from Node 16 to Node 20, ensuring our project stays at the cutting edge of technology.
 * 𝙀𝙢𝙗𝙧𝙖𝙘𝙞𝙣𝙜 𝙈𝙤𝙙𝙚𝙧𝙣 𝙅𝙖𝙫𝙖𝙎𝙘𝙧𝙞𝙥𝙩: By shifting from require statements to import, our code now fully leverages Node modules, streamlining our development process.
 * 𝘼𝙒𝙎 𝙎𝘿𝙆 𝙀𝙫𝙤𝙡𝙪𝙩𝙞𝙤𝙣: Our migration from AWS SDK v2 to v3 marks a significant leap forward in efficiency and performance.
@@ -20,6 +29,7 @@ Here's a snapshot of significant updates that have been done:
 * 𝙎𝙩𝙧𝙪𝙘𝙩𝙪𝙧𝙚𝙙 𝙇𝙤𝙜𝙜𝙞𝙣𝙜 𝙬𝙞𝙩𝙝 𝙋𝙤𝙬𝙚𝙧𝙏𝙤𝙤𝙡𝙨: The introduction of the PowerTools logger has transformed our logging process, enabling more effective tracking and analysis.
 * 𝙀𝙣𝙝𝙖𝙣𝙘𝙚𝙙 𝙋𝙚𝙧𝙛𝙤𝙧𝙢𝙖𝙣𝙘𝙚 with AJV Pre-compilation: By introducing AJV pre-compilation of schemas for Middy Validator, we've dramatically 𝗿𝗲𝗱𝘂𝗰𝗲𝗱 𝗼𝘂𝗿 𝗹𝗮𝗺𝗯𝗱𝗮 𝗽𝗮𝗰𝗸𝗮𝗴𝗲 𝘀𝗶𝘇𝗲 𝗳𝗿𝗼𝗺 𝟭.𝟳𝗠𝗕 𝘁𝗼 𝟰𝟳𝟴𝗞𝗕 (𝟳𝟮%). This significant reduction lowers cold start times and boosts overall performance.
 * 𝙎𝙞𝙢𝙥𝙡𝙞𝙛𝙞𝙘𝙖𝙩𝙞𝙤𝙣 𝙤𝙛 𝙘𝙧𝙚𝙙𝙚𝙣𝙩𝙞𝙖𝙡 𝙢𝙖𝙣𝙖𝙜𝙚𝙢𝙚𝙣𝙩: AWS CLI profile was removed from the configuration file due to complications it introduced in CI/CD configurations.
+
 
 # Quick start
 
