@@ -9,6 +9,13 @@ Highly opinionated project template for [Serverless Framework](https://www.serve
 
 # Recent modernization
 
+In July 2026 all dependencies were refreshed:
+* **Middy upgrade**: Middleware stack upgraded from Middy v5 to **v7** (requires Node.js >= 22) — no code changes were needed, the `.use()` chain and pre-compiled AJV validation keep working as before.
+* **Deployment tool update**: [osls](https://github.com/oss-serverless/serverless) upgraded from 3.51 to **3.76** (latest 3.x line). osls 4.0 was evaluated but intentionally skipped for now, because the `serverless-better-credentials` plugin (SSO support) only supports Serverless Framework `^2 || ^3`.
+* **Tooling refresh**: AWS SDK v3 clients bumped to 3.1094, AWS Lambda Powertools Logger to 2.34, Jest to 30.4, ESLint to 9.39 (ESLint 10 pending `neostandard` support), ajv-cmd to 0.8, dotenv to 17.
+* **Dependency hygiene**: Removed unused `ajv`, `ajv-formats` and `@eslint/js` dev dependencies. Added npm `overrides` that alias the phantom `serverless` peer dependency (pulled in by `serverless-better-credentials`) to `osls` and bump `esbuild` under `ajv-cmd` to a patched version. This removes a duplicate framework install and cuts npm audit findings from 14 (4 critical, 3 high) to 9 (2 critical, 0 high) — all remaining findings are in dev-only deployment/testing tooling; production dependencies audit clean (`npm audit --omit=dev`: 0 vulnerabilities).
+* **Node.js engines field**: `package.json` now declares `"node": ">=22"` to match the Lambda runtime and Middy v7 requirements.
+
 In 2025 the project received additional modernization updates:
 * 𝙉𝙤𝙙𝙚.𝙟𝙨 𝙍𝙪𝙣𝙩𝙞𝙢𝙚 𝙐𝙥𝙜𝙧𝙖𝙙𝙚: Upgraded from Node.js 20.x to 22.x in serverless configuration for enhanced performance and latest features.
 * 𝘿𝙚𝙥𝙡𝙤𝙮𝙢𝙚𝙣𝙩 𝙏𝙤𝙤𝙡 𝙈𝙞𝙜𝙧𝙖𝙩𝙞𝙤𝙣: Transitioned from serverless to [oss-serverless](https://github.com/oss-serverless/serverless) for support of Node.js 22 runtime.
@@ -221,15 +228,18 @@ For more information on direnv and its setup, visit https://direnv.net.
 # What's included?
 
 Serverless Framework plugins:
+- [serverless-better-credentials](https://github.com/thomasmichaelwallace/serverless-better-credentials) - to handle AWS SSO profiles seamlessly
 - [serverless-iam-roles-per-function](https://github.com/functionalone/serverless-iam-roles-per-function) - to manage individual IAM roles for each function
 - [serverless-export-env](https://github.com/arabold/serverless-export-env) - to export Lambda functions environment variables in `.awsenv` file
+- [serverless-plugin-scripts](https://github.com/mvila/serverless-plugin-scripts) - to run the schema pre-compilation build before packaging
 
 
 Node.js development libraries:
 
-* AWS SDK
-* Eslint with modified airbnb-base see `.eslintrc.yml`
+* AWS SDK v3
+* [Middy](https://middy.js.org/) v7 middleware engine with pre-compiled AJV schema validation ([ajv-cmd](https://github.com/willfarrell/ajv-cmd))
+* [AWS Lambda Powertools Logger](https://docs.powertools.aws.dev/lambda/typescript/latest/core/logger/) for structured logging
+* ESLint 9 with [neostandard](https://github.com/neostandard/neostandard) flat config, see `eslint.config.mjs`
 * Jest
 * dotenv
 * [aws-testing-library](https://github.com/erezrokah/aws-testing-library) for *end to end* testing
-* [serverless-logger](https://github.com/serverlesspolska/serverless-logger)
